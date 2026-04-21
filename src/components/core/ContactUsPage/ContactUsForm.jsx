@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import CountryCode from "../../../data/countrycode.json"
@@ -18,7 +18,7 @@ const ContactUsForm = () => {
     // console.log("Form Data - ", data)
     try {
       setLoading(true)
-      const res = await apiConnector(
+      await apiConnector(
         "POST",
         contactusEndpoint.CONTACT_US_API,
         data
