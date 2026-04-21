@@ -21,7 +21,6 @@ export default function UpdatePassword() {
   } = useForm()
 
   const submitPasswordForm = async (data) => {
-    // console.log("password Data - ", data)
     try {
       await changePassword(token, data)
     } catch (error) {
@@ -32,11 +31,17 @@ export default function UpdatePassword() {
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">Password</h2>
-          <div className="flex flex-col gap-5 lg:flex-row">
+        <div className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="h-2 w-2 rounded-full bg-yellow-500"></span>
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+              Password Settings
+            </h2>
+          </div>
+          
+          <div className="flex flex-col gap-6 lg:flex-row">
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="oldPassword" className="lable-style">
+              <label htmlFor="oldPassword" className="lable-style font-bold text-slate-700 ml-1">
                 Current Password
               </label>
               <input
@@ -49,22 +54,22 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowOldPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[38px] z-[10] cursor-pointer text-slate-400 hover:text-slate-600 transition-colors"
               >
                 {showOldPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible fontSize={24} />
                 ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEye fontSize={24} />
                 )}
               </span>
               {errors.oldPassword && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your Current Password.
+                <span className="ml-2 text-xs font-bold text-pink-600">
+                  Please enter your current password.
                 </span>
               )}
             </div>
             <div className="relative flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="newPassword" className="lable-style">
+              <label htmlFor="newPassword" className="lable-style font-bold text-slate-700 ml-1">
                 New Password
               </label>
               <input
@@ -77,32 +82,32 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[38px] z-[10] cursor-pointer text-slate-400 hover:text-slate-600 transition-colors"
               >
                 {showNewPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible fontSize={24} />
                 ) : (
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEye fontSize={24} />
                 )}
               </span>
               {errors.newPassword && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your New Password.
+                <span className="ml-2 text-xs font-bold text-pink-600">
+                  Please enter your new password.
                 </span>
               )}
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-3 mt-8">
           <button
             onClick={() => {
               navigate("/dashboard/my-profile")
             }}
-            className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
+            className="cursor-pointer rounded-full bg-slate-100 py-3 px-8 font-bold text-slate-600 hover:bg-slate-200 transition-all duration-300"
           >
             Cancel
           </button>
-          <IconBtn type="submit" text="Update" />
+          <IconBtn type="submit" text="Update Password" />
         </div>
       </form>
     </>

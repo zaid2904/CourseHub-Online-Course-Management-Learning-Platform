@@ -35,75 +35,71 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
       setActiveStatus(courseSectionData?.[currentSectionIndx]?._id)
       setVideoBarActive(activeSubSectionId)
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [courseSectionData, courseEntireData, location.pathname])
+  }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId])
 
   return (
-    <>
-      <div className="flex h-[calc(100vh-3.5rem)] w-[320px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800">
-        <div className="mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25">
-          <div className="flex w-full items-center justify-between ">
-            <div
-              onClick={() => {
-                navigate(`/dashboard/enrolled-courses`)
-              }}
-              className="flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90"
-              title="back"
-            >
-              <IoIosArrowBack size={30} />
-            </div>
-            <IconBtn
-              text="Add Review"
-              customClasses="ml-auto"
-              onclick={() => setReviewModal(true)}
-            />
-          </div>
-          <div className="flex flex-col">
-            <p>{courseEntireData?.courseName}</p>
-            <p className="text-sm font-semibold text-richblack-500">
-              {completedLectures?.length} / {totalNoOfLectures}
-            </p>
-          </div>
+    <div className="flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-white/10 bg-slate-950/75 backdrop-blur-xl">
+      <div className="mx-4 flex flex-col gap-4 border-b border-white/10 py-5">
+        <div className="flex w-full items-center gap-3">
+          <button
+            onClick={() => {
+              navigate(`/dashboard/enrolled-courses`)
+            }}
+            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition duration-300 hover:bg-white/10"
+            title="back"
+          >
+            <IoIosArrowBack size={24} />
+          </button>
+          <IconBtn
+            text="Add Review"
+            customClasses="ml-auto"
+            onclick={() => setReviewModal(true)}
+          />
         </div>
 
-        <div className="h-[calc(100vh - 5rem)] overflow-y-auto">
+        <div className="dashboard-surface p-4">
+          <p className="text-lg font-semibold text-white">
+            {courseEntireData?.courseName}
+          </p>
+          <p className="mt-2 text-sm text-slate-300">
+            {completedLectures?.length} of {totalNoOfLectures} lessons
+            completed
+          </p>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-4">
+        <div className="space-y-3">
           {courseSectionData.map((course, index) => (
             <div
-              className="mt-2 cursor-pointer text-sm text-richblack-5"
-              onClick={() => setActiveStatus(course?._id)}
+              className="overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03]"
               key={index}
             >
-              {/* Section */}
-              <div className="flex flex-row justify-between bg-richblack-600 px-5 py-4">
-                <div className="w-[70%] font-semibold">
+              <button
+                className="flex w-full items-center justify-between px-5 py-4 text-left"
+                onClick={() => setActiveStatus(course?._id)}
+              >
+                <div className="w-[78%] text-sm font-semibold text-white">
                   {course?.sectionName}
                 </div>
-                <div className="flex items-center gap-3">
-                  {/* <span className="text-[12px] font-medium">
-                    Lession {course?.subSection.length}
-                  </span> */}
-                  <span
-                    className={`${
-                      activeStatus === course?.sectionName
-                        ? "rotate-0"
-                        : "rotate-180"
-                    } transition-all duration-500`}
-                  >
-                    <BsChevronDown />
-                  </span>
-                </div>
-              </div>
+                <span
+                  className={`transition-all duration-300 ${
+                    activeStatus === course?._id ? "rotate-0" : "rotate-180"
+                  }`}
+                >
+                  <BsChevronDown className="text-slate-300" />
+                </span>
+              </button>
 
-              {/* Sub Sections */}
               {activeStatus === course?._id && (
-                <div className="transition-[height] duration-500 ease-in-out">
+                <div className="border-t border-white/10 p-2">
                   {course.subSection.map((topic, i) => (
-                    <div
-                      className={`flex gap-3  px-5 py-2 ${
+                    <button
+                      className={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition duration-300 ${
                         videoBarActive === topic._id
-                          ? "bg-yellow-200 font-semibold text-richblack-800"
-                          : "hover:bg-richblack-900"
-                      } `}
+                          ? "bg-cyan-300 text-slate-950"
+                          : "text-slate-200 hover:bg-white/5"
+                      }`}
                       key={i}
                       onClick={() => {
                         navigate(
@@ -116,9 +112,10 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         type="checkbox"
                         checked={completedLectures.includes(topic?._id)}
                         onChange={() => {}}
+                        className="h-4 w-4 accent-slate-950"
                       />
-                      {topic.title}
-                    </div>
+                      <span>{topic.title}</span>
+                    </button>
                   ))}
                 </div>
               )}
@@ -126,6 +123,6 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }

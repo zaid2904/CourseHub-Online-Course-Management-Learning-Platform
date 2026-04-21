@@ -43,67 +43,75 @@ export default function CourseReviewModal({ setReviewModal }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-slate-900/20 backdrop-blur-sm">
+      <div className="my-10 w-11/12 max-w-[700px] rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
         {/* Modal Header */}
-        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-          <p className="text-xl font-semibold text-richblack-5">Add Review</p>
-          <button onClick={() => setReviewModal(false)}>
-            <RxCross2 className="text-2xl text-richblack-5" />
+        <div className="flex items-center justify-between bg-slate-50 p-6 border-b border-slate-200">
+          <p className="text-xl font-bold text-slate-900 tracking-tight">Add Review</p>
+          <button onClick={() => setReviewModal(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
+            <RxCross2 className="text-2xl" />
           </button>
         </div>
         {/* Modal Body */}
-        <div className="p-6">
-          <div className="flex items-center justify-center gap-x-4">
-            <img
-              src={user?.image}
-              alt={user?.firstName + "profile"}
-              className="aspect-square w-[50px] rounded-full object-cover"
-            />
+        <div className="p-8">
+          <div className="flex items-center justify-center gap-x-4 mb-8">
+            <div className="h-14 w-14 shrink-0 rounded-full border-2 border-slate-100 shadow-sm overflow-hidden bg-slate-50">
+              <img
+                src={user?.image}
+                alt={user?.firstName + "profile"}
+                className="h-full w-full object-cover object-center aspect-square"
+                onError={(e) => {
+                  e.target.src = `https://api.dicebear.com/5.x/initials/svg?seed=${user?.firstName} ${user?.lastName}`
+                }}
+              />
+            </div>
             <div className="">
-              <p className="font-semibold text-richblack-5">
+              <p className="font-bold text-lg text-slate-900 leading-tight">
                 {user?.firstName} {user?.lastName}
               </p>
-              <p className="text-sm text-richblack-5">Posting Publicly</p>
+              <p className="text-sm font-medium text-slate-500 mt-1">Posting Publicly</p>
             </div>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mt-6 flex flex-col items-center"
+            className="flex flex-col items-center"
           >
-            <ReactStars
-              count={5}
-              onChange={ratingChanged}
-              size={24}
-              activeColor="#ffd700"
-            />
-            <div className="flex w-11/12 flex-col space-y-2">
+            <div className="mb-6">
+              <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={32}
+                activeColor="#eab308"
+                emptyIcon={<div className="text-slate-200">★</div>}
+              />
+            </div>
+            <div className="flex w-full flex-col space-y-2">
               <label
-                className="text-sm text-richblack-5"
+                className="text-sm font-bold text-slate-700 ml-1"
                 htmlFor="courseExperience"
               >
-                Add Your Experience <sup className="text-pink-200">*</sup>
+                Add Your Experience <sup className="text-pink-600">*</sup>
               </label>
               <textarea
                 id="courseExperience"
-                placeholder="Add Your Experience"
+                placeholder="Share your thoughts about this course..."
                 {...register("courseExperience", { required: true })}
-                className="form-style resize-x-none min-h-[130px] w-full"
+                className="form-style min-h-[150px] w-full p-4 rounded-2xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none"
               />
               {errors.courseExperience && (
-                <span className="ml-2 text-xs tracking-wide text-pink-200">
-                  Please Add Your Experience
+                <span className="ml-2 text-xs font-bold text-pink-600">
+                  Please share your experience
                 </span>
               )}
             </div>
-            <div className="mt-6 flex w-11/12 justify-end gap-x-2">
+            <div className="mt-8 flex w-full justify-end gap-x-3">
               <button
                 onClick={() => setReviewModal(false)}
-                className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+                className="flex cursor-pointer items-center gap-x-2 rounded-full bg-slate-100 py-2.5 px-6 font-bold text-slate-600 hover:bg-slate-200 transition-all duration-200"
               >
                 Cancel
               </button>
-              <IconBtn text="Save" />
+              <IconBtn text="Save Review" />
             </div>
           </form>
         </div>

@@ -169,12 +169,12 @@ const VideoDetails = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5 text-white">
+    <div className="flex flex-col gap-6 text-white">
       {!videoData ? (
         <img
           src={previewSource}
           alt="Preview"
-          className="h-full w-full rounded-md object-cover"
+          className="h-full w-full rounded-[28px] object-cover"
         />
       ) : (
         <Player
@@ -239,8 +239,12 @@ const VideoDetails = () => {
         </Player>
       )}
 
-      <h1 className="mt-4 text-3xl font-semibold">{videoData?.title}</h1>
-      <p className="pt-2 pb-6">{videoData?.description}</p>
+      <div className="dashboard-surface p-6">
+        <h1 className="font-display text-3xl font-semibold text-white">
+          {videoData?.title}
+        </h1>
+        <p className="pt-3 text-slate-300">{videoData?.description}</p>
+      </div>
     </div>
   )
 }

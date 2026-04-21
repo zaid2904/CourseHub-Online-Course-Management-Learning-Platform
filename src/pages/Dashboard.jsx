@@ -16,11 +16,15 @@ function Dashboard() {
   }
 
   return (
-    <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-      <Sidebar />
-      <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
-        <div className="mx-auto w-11/12 max-w-[1000px] py-10">
-          <Outlet />
+    <div className="relative min-h-[calc(100vh-5rem)] bg-slate-50/50 p-4 lg:p-8">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="dashboard-shell flex flex-col gap-6 lg:flex-row">
+          <Sidebar />
+          <main className="flex-1 min-w-0">
+            <div className="mx-auto w-full max-w-[1000px] py-4">
+              <Outlet />
+            </div>
+          </main>
         </div>
       </div>
     </div>

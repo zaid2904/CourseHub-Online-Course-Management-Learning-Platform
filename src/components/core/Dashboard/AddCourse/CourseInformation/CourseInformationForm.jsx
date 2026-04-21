@@ -158,12 +158,12 @@ export default function CourseInformationForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
+      className="space-y-10 rounded-[32px] border border-slate-200 bg-white p-10 shadow-sm"
     >
       {/* Course Title */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseTitle">
-          Course Title <sup className="text-pink-200">*</sup>
+        <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="courseTitle">
+          Course Title <sup className="text-pink-600">*</sup>
         </label>
         <input
           id="courseTitle"
@@ -172,32 +172,32 @@ export default function CourseInformationForm() {
           className="form-style w-full"
         />
         {errors.courseTitle && (
-          <span className="ml-2 text-xs tracking-wide text-pink-200">
+          <span className="ml-2 text-xs font-bold text-pink-600">
             Course title is required
           </span>
         )}
       </div>
       {/* Course Short Description */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseShortDesc">
-          Course Short Description <sup className="text-pink-200">*</sup>
+        <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="courseShortDesc">
+          Course Short Description <sup className="text-pink-600">*</sup>
         </label>
         <textarea
           id="courseShortDesc"
           placeholder="Enter Description"
           {...register("courseShortDesc", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          className="form-style resize-x-none min-h-[140px] w-full"
         />
         {errors.courseShortDesc && (
-          <span className="ml-2 text-xs tracking-wide text-pink-200">
+          <span className="ml-2 text-xs font-bold text-pink-600">
             Course Description is required
           </span>
         )}
       </div>
       {/* Course Price */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="coursePrice">
-          Course Price <sup className="text-pink-200">*</sup>
+        <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="coursePrice">
+          Course Price <sup className="text-pink-600">*</sup>
         </label>
         <div className="relative">
           <input
@@ -212,24 +212,24 @@ export default function CourseInformationForm() {
             })}
             className="form-style w-full !pl-12"
           />
-          <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
+          <HiOutlineCurrencyRupee className="absolute left-4 top-1/2 inline-block -translate-y-1/2 text-2xl text-slate-400" />
         </div>
         {errors.coursePrice && (
-          <span className="ml-2 text-xs tracking-wide text-pink-200">
+          <span className="ml-2 text-xs font-bold text-pink-600">
             Course Price is required
           </span>
         )}
       </div>
       {/* Course Category */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseCategory">
-          Course Category <sup className="text-pink-200">*</sup>
+        <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="courseCategory">
+          Course Category <sup className="text-pink-600">*</sup>
         </label>
         <select
           {...register("courseCategory", { required: true })}
           defaultValue=""
           id="courseCategory"
-          className="form-style w-full"
+          className="form-style w-full appearance-none cursor-pointer"
         >
           <option value="" disabled>
             Choose a Category
@@ -242,7 +242,7 @@ export default function CourseInformationForm() {
             ))}
         </select>
         {errors.courseCategory && (
-          <span className="ml-2 text-xs tracking-wide text-pink-200">
+          <span className="ml-2 text-xs font-bold text-pink-600">
             Course Category is required
           </span>
         )}
@@ -268,17 +268,17 @@ export default function CourseInformationForm() {
       />
       {/* Benefits of the course */}
       <div className="flex flex-col space-y-2">
-        <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
-          Benefits of the course <sup className="text-pink-200">*</sup>
+        <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="courseBenefits">
+          Benefits of the course <sup className="text-pink-600">*</sup>
         </label>
         <textarea
           id="courseBenefits"
           placeholder="Enter benefits of the course"
           {...register("courseBenefits", { required: true })}
-          className="form-style resize-x-none min-h-[130px] w-full"
+          className="form-style resize-x-none min-h-[140px] w-full"
         />
         {errors.courseBenefits && (
-          <span className="ml-2 text-xs tracking-wide text-pink-200">
+          <span className="ml-2 text-xs font-bold text-pink-600">
             Benefits of the course is required
           </span>
         )}
@@ -293,21 +293,21 @@ export default function CourseInformationForm() {
         getValues={getValues}
       />
       {/* Next Button */}
-      <div className="flex justify-end gap-x-2">
+      <div className="flex justify-end gap-x-3 pt-4">
         {editCourse && (
           <button
             onClick={() => dispatch(setStep(2))}
             disabled={loading}
-            className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+            className="flex cursor-pointer items-center gap-x-2 rounded-full bg-slate-100 py-2.5 px-6 font-bold text-slate-600 hover:bg-slate-200 transition-all duration-300"
           >
-            Continue Wihout Saving
+            Continue Without Saving
           </button>
         )}
         <IconBtn
           disabled={loading}
-          text={!editCourse ? "Next" : "Save Changes"}
+          text={!editCourse ? "Next Step" : "Save Changes"}
         >
-          <MdNavigateNext />
+          <MdNavigateNext className="text-xl" />
         </IconBtn>
       </div>
     </form>

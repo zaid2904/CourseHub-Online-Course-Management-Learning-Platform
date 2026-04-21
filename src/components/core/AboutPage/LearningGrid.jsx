@@ -53,19 +53,19 @@ const LearningGrid = () => {
             key={i}
             className={`${i === 0 && "xl:col-span-2 xl:h-[294px]"}  ${
               card.order % 2 === 1
-                ? "bg-richblack-700 h-[294px]"
+                ? "bg-slate-50 h-[294px] border border-slate-100"
                 : card.order % 2 === 0
-                ? "bg-richblack-800 h-[294px]"
+                ? "bg-white h-[294px] border border-slate-100"
                 : "bg-transparent"
             } ${card.order === 3 && "xl:col-start-2"}  `}
           >
             {card.order < 0 ? (
               <div className="xl:w-[90%] flex flex-col gap-3 pb-10 xl:pb-0">
-                <div className="text-4xl font-semibold ">
+                <div className="text-4xl font-bold text-slate-900 tracking-tight">
                   {card.heading}
                   <HighlightText text={card.highliteText} />
                 </div>
-                <p className="text-richblack-300 font-medium">
+                <p className="text-slate-600 font-medium">
                   {card.description}
                 </p>
 
@@ -77,9 +77,9 @@ const LearningGrid = () => {
               </div>
             ) : (
               <div className="p-8 flex flex-col gap-8">
-                <h1 className="text-richblack-5 text-lg">{card.heading}</h1>
+                <h1 className="text-slate-900 text-xl font-bold tracking-tight">{card.heading}</h1>
 
-                <p className="text-richblack-300 font-medium">
+                <p className="text-slate-600 font-medium leading-relaxed">
                   {card.description}
                 </p>
               </div>

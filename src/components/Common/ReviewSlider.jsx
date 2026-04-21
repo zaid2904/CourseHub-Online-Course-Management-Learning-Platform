@@ -36,10 +36,10 @@ function ReviewSlider() {
   // console.log(reviews)
 
   return (
-    <div className="text-white">
-      <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
+    <div className="w-full">
+      <div className="my-[20px] w-full max-w-maxContentTab lg:max-w-maxContent pb-10">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={1}
           spaceBetween={25}
           loop={true}
           freeMode={true}
@@ -47,57 +47,71 @@ function ReviewSlider() {
             delay: 2500,
             disableOnInteraction: false,
           }}
+          breakpoints={{
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }}
           modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          className="w-full !pb-10"
+          pagination={{ clickable: true, dynamicBullets: true }}
         >
           {reviews.map((review, i) => {
             return (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={
-                        review?.user?.image
-                          ? review?.user?.image
-                          : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
-                      }
-                      alt=""
-                      className="h-9 w-9 rounded-full object-cover"
-                    />
-                    <div className="flex flex-col">
-                      <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
-                      <h2 className="text-[12px] font-medium text-richblack-500">
-                        {review?.course?.courseName}
-                      </h2>
+              <SwiperSlide key={i} className="h-auto">
+                <div className="group flex h-full flex-col justify-between rounded-2xl border border-slate-200/60 bg-white/70 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-slate-300 hover:bg-white/90 hover:shadow-[0_12px_40px_rgba(15,23,42,0.08)]">
+                  <div>
+                    <div className="flex items-center gap-4 mb-5">
+                      <div className="relative h-12 w-12 shrink-0">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-300 to-purple-300 opacity-50 blur-sm group-hover:opacity-100 transition-opacity"></div>
+                        <img
+                          src={
+                            review?.user?.image
+                              ? review?.user?.image
+                              : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
+                          }
+                          alt={`${review?.user?.firstName} ${review?.user?.lastName}`}
+                          className="relative h-full w-full rounded-full border-[1.5px] border-white object-cover object-center shadow-sm bg-slate-100 aspect-square"
+                          onError={(e) => {
+                            e.target.src = `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <h1 className="text-[15px] font-bold text-slate-900 leading-tight">
+                          {`${review?.user?.firstName} ${review?.user?.lastName}`}
+                        </h1>
+                        <h2 className="text-xs font-medium text-slate-500 mt-1 line-clamp-1">
+                          {review?.course?.courseName}
+                        </h2>
+                      </div>
                     </div>
-                  </div>
-                  <p className="font-medium text-richblack-25">
-                    {review?.review.split(" ").length > truncateWords
-                      ? `${review?.review
-                          .split(" ")
-                          .slice(0, truncateWords)
-                          .join(" ")} ...`
-                      : `${review?.review}`}
-                  </p>
-                  <div className="flex items-center gap-2 ">
-                    <h3 className="font-semibold text-yellow-100">
-                      {review.rating.toFixed(1)}
-                    </h3>
-                    <ReactStars
-                      count={5}
-                      value={review.rating}
-                      size={20}
-                      edit={false}
-                      activeColor="#ffd700"
-                      emptyIcon={<FaStar />}
-                      fullIcon={<FaStar />}
-                    />
+
+                    <div className="mb-4 flex items-center gap-2">
+                      <div className="flex items-center gap-1 bg-yellow-50/50 px-2 py-1 rounded-md border border-yellow-100/50">
+                        <h3 className="text-[13px] font-bold text-yellow-600 pt-0.5">
+                          {review.rating.toFixed(1)}
+                        </h3>
+                        <ReactStars
+                          count={5}
+                          value={review.rating}
+                          size={16}
+                          edit={false}
+                          activeColor="#eab308"
+                          emptyIcon={<FaStar className="text-slate-200" />}
+                          fullIcon={<FaStar />}
+                        />
+                      </div>
+                    </div>
+
+                    <p className="text-[14px] leading-relaxed text-slate-600 font-medium line-clamp-4">
+                      "{review?.review}"
+                    </p>
                   </div>
                 </div>
               </SwiperSlide>
             )
           })}
-          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
         </Swiper>
       </div>
     </div>

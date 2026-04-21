@@ -99,8 +99,8 @@ function SignupForm() {
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
           <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              First Name <sup className="text-pink-200">*</sup>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+              First Name <sup className="text-pink-600">*</sup>
             </p>
             <input
               required
@@ -113,8 +113,8 @@ function SignupForm() {
             />
           </label>
           <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Last Name <sup className="text-pink-200">*</sup>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+              Last Name <sup className="text-pink-600">*</sup>
             </p>
             <input
               required
@@ -128,8 +128,8 @@ function SignupForm() {
           </label>
         </div>
         <label className="w-full">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            Email Address <sup className="text-pink-200">*</sup>
+          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+            Email Address <sup className="text-pink-600">*</sup>
           </p>
           <input
             required
@@ -144,8 +144,8 @@ function SignupForm() {
         </label>
         <div className="flex gap-x-4">
           <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Create Password <sup className="text-pink-200">*</sup>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+              Create Password <sup className="text-pink-600">*</sup>
             </p>
             <input
               required
@@ -161,16 +161,16 @@ function SignupForm() {
               className="absolute right-3 top-[38px] z-[10] cursor-pointer"
             >
               {showPassword ? (
-                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                <AiOutlineEyeInvisible fontSize={24} fill="#64748b" />
               ) : (
-                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                <AiOutlineEye fontSize={24} fill="#64748b" />
               )}
             </span>
-            <p className="text-pink-100 mt-1 ">{passAlert}</p>
+            <p className="text-pink-600 mt-1 text-xs">{passAlert}</p>
           </label>
           <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Confirm Password <sup className="text-pink-200">*</sup>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+              Confirm Password <sup className="text-pink-600">*</sup>
             </p>
             <input
               required
@@ -186,16 +186,16 @@ function SignupForm() {
               className="absolute right-3 top-[38px] z-[10] cursor-pointer"
             >
               {showConfirmPassword ? (
-                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                <AiOutlineEyeInvisible fontSize={24} fill="#64748b" />
               ) : (
-                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+                <AiOutlineEye fontSize={24} fill="#64748b" />
               )}
             </span>
           </label>
         </div>
         <button
           type="submit"
-          className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+          className="mt-6 rounded-full bg-blue-600 py-3 px-6 font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300 active:scale-95"
         >
           Create Account
         </button>

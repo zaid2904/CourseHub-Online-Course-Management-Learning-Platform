@@ -1,7 +1,8 @@
-import React from "react";
-import CTAButton from "./Button";
-import { TypeAnimation } from "react-type-animation";
-import { FaArrowRight } from "react-icons/fa";
+import React from "react"
+import { FaArrowRight } from "react-icons/fa"
+import { TypeAnimation } from "react-type-animation"
+
+import CTAButton from "./Button"
 
 const CodeBlocks = ({
   position,
@@ -14,20 +15,17 @@ const CodeBlocks = ({
   codeColor,
 }) => {
   return (
-    <div className={`flex ${position} my-20 justify-between flex-col lg:gap-10 gap-10`}>
-
-
-      {/* Section 1  */}
-      <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
+    <div
+      className={`flex ${position} items-center justify-between gap-10 rounded-[32px] border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-xl lg:p-10`}
+    >
+      <div className="flex w-full flex-col gap-8 lg:w-[48%]">
         {heading}
 
-        {/* Sub Heading */}
-        <div className="text-richblack-300 text-base font-bold w-[85%] -mt-3">
+        <div className="max-w-xl text-base leading-7 text-slate-600">
           {subheading}
         </div>
 
-        {/* Button Group */}
-        <div className="flex gap-7 mt-7">
+        <div className="flex flex-wrap gap-4">
           <CTAButton active={ctabtn1.active} linkto={ctabtn1.link}>
             <div className="flex items-center gap-2">
               {ctabtn1.btnText}
@@ -40,27 +38,24 @@ const CodeBlocks = ({
         </div>
       </div>
 
-      {/* Section 2 */}
-      <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
+      <div className="relative flex h-fit w-full overflow-hidden rounded-[28px] border border-slate-200 bg-slate-50 px-4 py-5 text-[10px] leading-[18px] shadow-sm sm:text-sm sm:leading-6 lg:w-[500px]">
         {backgroundGradient}
-        {/* Indexing */}
-        <div className="text-center flex flex-col   w-[10%] select-none text-richblack-400 font-inter font-bold ">
-          <p>1</p>
-          <p>2</p>
-          <p>3</p>
-          <p>4</p>
-          <p>5</p>
-          <p>6</p>
-          <p>7</p>
-          <p>8</p>
-          <p>9</p>
+        <div className="flex w-[12%] select-none flex-col text-center font-mono font-bold text-slate-500">
+          <p>01</p>
+          <p>02</p>
+          <p>03</p>
+          <p>04</p>
+          <p>05</p>
+          <p>06</p>
+          <p>07</p>
+          <p>08</p>
+          <p>09</p>
           <p>10</p>
           <p>11</p>
         </div>
 
-        {/* Codes */}
         <div
-          className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}
+          className={`w-[88%] pr-2 font-mono font-medium ${codeColor} relative z-10`}
         >
           <TypeAnimation
             sequence={[codeblock, 1000, ""]}
@@ -75,7 +70,7 @@ const CodeBlocks = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CodeBlocks;
+export default CodeBlocks

@@ -8,7 +8,7 @@ import ContactForm from "../components/core/ContactUsPage/ContactForm"
 const Contact = () => {
   return (
     <div>
-      <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
+      <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-slate-900 lg:flex-row">
         {/* Contact Details */}
         <div className="lg:w-[40%]">
           <ContactDetails />
@@ -19,9 +19,9 @@ const Contact = () => {
           <ContactForm />
         </div>
       </div>
-      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-slate-900">
         {/* Reviws from Other Learner */}
-        <h1 className="text-center text-4xl font-semibold mt-8">
+        <h1 className="text-center text-4xl font-bold mt-8 tracking-tight">
           Reviews from other learners
         </h1>
         <ReviewSlider />

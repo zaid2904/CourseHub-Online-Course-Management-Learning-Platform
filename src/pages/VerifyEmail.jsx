@@ -54,10 +54,10 @@ function VerifyEmail() {
         </div>
       ) : (
         <div className="max-w-[500px] p-4 lg:p-8">
-          <h1 className="text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem]">
+          <h1 className="text-slate-900 font-extrabold text-[2.25rem] leading-[2.75rem] tracking-tight">
             Verify Email
           </h1>
-          <p className="text-[1.125rem] leading-[1.625rem] my-4 text-richblack-100">
+          <p className="text-[1.125rem] leading-[1.625rem] my-4 text-slate-600 font-medium">
             A verification code has been sent to you. Enter the code below
           </p>
           <form onSubmit={handleVerifyAndSignup}>
@@ -69,10 +69,7 @@ function VerifyEmail() {
                 <input
                   {...props}
                   placeholder="-"
-                  style={{
-                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                  }}
-                  className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"
+                  className="w-[48px] lg:w-[60px] border border-slate-200 bg-white rounded-xl text-slate-900 aspect-square text-center focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-bold text-xl shadow-sm"
                 />
               )}
               containerStyle={{
@@ -82,19 +79,19 @@ function VerifyEmail() {
             />
             <button
               type="submit"
-              className="w-full bg-yellow-50 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900"
+              className="w-full bg-blue-600 py-3 px-6 rounded-full mt-8 font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300"
             >
               Verify Email
             </button>
           </form>
           <div className="mt-6 flex items-center justify-between">
             <Link to="/signup">
-              <p className="text-richblack-5 flex items-center gap-x-2">
+              <p className="text-blue-600 font-semibold flex items-center gap-x-2 hover:text-blue-700 transition-colors">
                 <BiArrowBack /> Back To Signup
               </p>
             </Link>
             <button
-              className="flex items-center text-blue-100 gap-x-2"
+              className="flex items-center text-slate-600 font-semibold gap-x-2 hover:text-blue-600 transition-colors"
               onClick={() => dispatch(sendOtp(signupData.email))}
             >
               <RxCountdownTimer />

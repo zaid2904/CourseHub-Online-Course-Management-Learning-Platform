@@ -56,22 +56,22 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
   return (
     <>
       <div
-        className={`flex flex-col gap-4 rounded-md bg-richblack-700 p-4 text-richblack-5`}
+        className={`flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-sm`}
       >
         {/* Course Image */}
         <img
           src={ThumbnailImage}
           alt={course?.courseName}
-          className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full"
+          className="max-h-[300px] min-h-[180px] w-full overflow-hidden rounded-xl object-cover"
         />
 
-        <div className="px-4">
-          <div className="space-x-3 pb-4 text-3xl font-semibold">
+        <div className="px-2">
+          <div className="space-x-3 pb-4 text-3xl font-bold text-slate-900">
             Rs. {CurrentPrice}
           </div>
           <div className="flex flex-col gap-4">
             <button
-              className="yellowButton"
+              className="yellowButton w-full rounded-md bg-blue-600 py-3 font-semibold text-white transition-all hover:bg-blue-700"
               onClick={
                 user && course?.studentsEnroled.includes(user?._id)
                   ? () => navigate("/dashboard/enrolled-courses")
@@ -83,35 +83,35 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 : "Enroll Now"}
             </button>
             {(!user || !course?.studentsEnroled.includes(user?._id)) && (
-              <button onClick={handleAddToCart} className="blackButton">
+              <button onClick={handleAddToCart} className="blackButton w-full rounded-md bg-slate-100 py-3 font-semibold text-slate-900 transition-all hover:bg-slate-200">
                 Add to Cart
               </button>
             )}
           </div>
           <div>
-            <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
+            <p className="pb-3 pt-6 text-center text-sm text-slate-500">
               Enroll instantly and start learning right away
             </p>
           </div>
 
           <div className={``}>
-            <p className={`my-2 text-xl font-semibold `}>
+            <p className={`my-2 text-xl font-semibold text-slate-800`}>
               This Course Includes :
             </p>
-            <div className="flex flex-col gap-3 text-sm text-caribbeangreen-100">
+            <div className="flex flex-col gap-3 text-sm text-slate-600">
               {course?.instructions?.map((item, i) => {
                 return (
                   <p className={`flex gap-2`} key={i}>
-                    <BsFillCaretRightFill />
+                    <BsFillCaretRightFill className="mt-1 text-blue-600" />
                     <span>{item}</span>
                   </p>
                 )
               })}
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center mt-4">
             <button
-              className="mx-auto flex items-center gap-2 py-6 text-yellow-100 "
+              className="mx-auto flex items-center gap-2 py-4 text-slate-600 hover:text-slate-900 transition-colors"
               onClick={handleShare}
             >
               <FaShareSquare size={15} /> Share

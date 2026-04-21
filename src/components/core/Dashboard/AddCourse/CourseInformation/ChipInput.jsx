@@ -63,8 +63,8 @@ export default function ChipInput({
   return (
     <div className="flex flex-col space-y-2">
       {/* Render the label for the input */}
-      <label className="text-sm text-richblack-5" htmlFor={name}>
-        {label} <sup className="text-pink-200">*</sup>
+      <label className="text-sm font-bold text-slate-700 ml-1" htmlFor={name}>
+        {label} <sup className="text-pink-600">*</sup>
       </label>
       {/* Render the chips and input */}
       <div className="flex w-full flex-wrap gap-y-2">
@@ -72,14 +72,14 @@ export default function ChipInput({
         {chips.map((chip, index) => (
           <div
             key={index}
-            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
+            className="m-1 flex items-center rounded-full bg-blue-50 px-3 py-1 text-sm font-bold text-blue-600 border border-blue-100"
           >
             {/* Render the chip value */}
             {chip}
             {/* Render the button to delete the chip */}
             <button
               type="button"
-              className="ml-2 focus:outline-none"
+              className="ml-2 focus:outline-none hover:text-blue-800 transition-colors"
               onClick={() => handleDeleteChip(index)}
             >
               <MdClose className="text-sm" />
@@ -98,7 +98,7 @@ export default function ChipInput({
       </div>
       {/* Render an error message if the input is required and not filled */}
       {errors[name] && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs font-bold text-pink-600">
           {label} is required
         </span>
       )}

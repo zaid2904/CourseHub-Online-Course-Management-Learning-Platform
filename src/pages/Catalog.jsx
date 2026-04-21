@@ -59,18 +59,18 @@ function Catalog() {
   return (
     <>
       {/* Hero Section */}
-      <div className=" box-content bg-richblack-800 px-4">
+      <div className=" box-content bg-slate-50 px-4 border-b border-slate-200">
         <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
-          <p className="text-sm text-richblack-300">
+          <p className="text-sm text-slate-500">
             {`Home / Catalog / `}
-            <span className="text-yellow-25">
+            <span className="text-blue-600 font-semibold">
               {catalogPageData?.data?.selectedCategory?.name}
             </span>
           </p>
-          <p className="text-3xl text-richblack-5">
+          <p className="text-3xl font-bold text-slate-900">
             {catalogPageData?.data?.selectedCategory?.name}
           </p>
-          <p className="max-w-[870px] text-richblack-200">
+          <p className="max-w-[870px] text-slate-600 leading-relaxed">
             {catalogPageData?.data?.selectedCategory?.description}
           </p>
         </div>
@@ -79,23 +79,23 @@ function Catalog() {
       {/* Section 1 */}
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
         <div className="section_heading">Courses to get you started</div>
-        <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+        <div className="my-4 flex border-b border-b-slate-200 text-sm font-medium">
           <p
             className={`px-4 py-2 ${
               active === 1
-                ? "border-b border-b-yellow-25 text-yellow-25"
-                : "text-richblack-50"
-            } cursor-pointer`}
+                ? "border-b-2 border-b-blue-600 text-blue-600"
+                : "text-slate-500 hover:text-slate-900"
+            } cursor-pointer transition-all duration-200`}
             onClick={() => setActive(1)}
           >
-            Most Populer
+            Most Popular
           </p>
           <p
             className={`px-4 py-2 ${
               active === 2
-                ? "border-b border-b-yellow-25 text-yellow-25"
-                : "text-richblack-50"
-            } cursor-pointer`}
+                ? "border-b-2 border-b-blue-600 text-blue-600"
+                : "text-slate-500 hover:text-slate-900"
+            } cursor-pointer transition-all duration-200`}
             onClick={() => setActive(2)}
           >
             New

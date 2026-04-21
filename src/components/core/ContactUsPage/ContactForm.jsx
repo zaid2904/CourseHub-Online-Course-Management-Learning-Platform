@@ -3,12 +3,12 @@ import ContactUsForm from "./ContactUsForm";
 
 const ContactForm = () => {
   return (
-    <div className="border border-richblack-600 text-richblack-300 rounded-xl p-7 lg:p-14 flex gap-3 flex-col">
-      <h1 className="text-4xl leading-10 font-semibold text-richblack-5">
-        Got a Idea? We&apos;ve got the skills. Let&apos;s team up
+    <div className="border border-slate-200 bg-white text-slate-600 rounded-3xl p-7 lg:p-14 flex gap-3 flex-col shadow-sm">
+      <h1 className="text-4xl leading-tight font-extrabold text-slate-900 tracking-tight">
+        Got an idea? We&apos;ve got the skills. Let&apos;s team up.
       </h1>
-      <p className="">
-        Tell us more about yourself and what you&apos;re got in mind.
+      <p className="text-lg font-medium text-slate-500">
+        Tell us more about yourself and what you&apos;ve got in mind.
       </p>
 
       <div className="mt-7">

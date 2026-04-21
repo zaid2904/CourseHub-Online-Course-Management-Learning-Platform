@@ -41,43 +41,44 @@ export default function RequirementsField({
 
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
-        {label} <sup className="text-pink-200">*</sup>
+      <label className="text-sm font-bold text-slate-700 ml-1" htmlFor={name}>
+        {label} <sup className="text-pink-600">*</sup>
       </label>
-      <div className="flex flex-col items-start space-y-2">
+      <div className="flex flex-col items-start space-y-3">
         <input
           type="text"
           id={name}
           value={requirement}
+          placeholder="e.g. Basic knowledge of JavaScript"
           onChange={(e) => setRequirement(e.target.value)}
           className="form-style w-full"
         />
         <button
           type="button"
           onClick={handleAddRequirement}
-          className="font-semibold text-yellow-50"
+          className="font-extrabold text-blue-600 hover:text-blue-700 transition-colors ml-1"
         >
-          Add
+          + Add Requirement
         </button>
       </div>
       {requirementsList.length > 0 && (
-        <ul className="mt-2 list-inside list-disc">
+        <ul className="mt-4 space-y-2">
           {requirementsList.map((requirement, index) => (
-            <li key={index} className="flex items-center text-richblack-5">
-              <span>{requirement}</span>
+            <li key={index} className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2 border border-slate-100 group">
+              <span className="text-sm font-medium text-slate-700">{requirement}</span>
               <button
                 type="button"
-                className="ml-2 text-xs text-pure-greys-300 "
+                className="text-xs font-bold text-slate-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                 onClick={() => handleRemoveRequirement(index)}
               >
-                clear
+                Remove
               </button>
             </li>
           ))}
         </ul>
       )}
       {errors[name] && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs font-bold text-pink-600">
           {label} is required
         </span>
       )}

@@ -124,21 +124,27 @@ export default function SubSectionModal({
   }
 
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-slate-900/40 backdrop-blur-md transition-all duration-300">
+      <div className="my-10 w-11/12 max-w-[700px] rounded-[32px] border border-slate-200 bg-white shadow-2xl overflow-hidden">
         {/* Modal Header */}
-        <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-          <p className="text-xl font-semibold text-richblack-5">
-            {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
-          </p>
-          <button onClick={() => (!loading ? setModalData(null) : {})}>
-            <RxCross2 className="text-2xl text-richblack-5" />
+        <div className="flex items-center justify-between bg-slate-50 p-6 px-8 border-b border-slate-100">
+          <div className="flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+            <p className="text-xl font-extrabold text-slate-900 tracking-tight">
+              {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
+            </p>
+          </div>
+          <button 
+            onClick={() => (!loading ? setModalData(null) : {})}
+            className="p-2 hover:bg-slate-200 rounded-full transition-colors"
+          >
+            <RxCross2 className="text-2xl text-slate-500" />
           </button>
         </div>
         {/* Modal Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-8 px-8 py-10"
+          className="space-y-10 px-10 py-12"
         >
           {/* Lecture Video Upload */}
           <Upload
@@ -153,8 +159,8 @@ export default function SubSectionModal({
           />
           {/* Lecture Title */}
           <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureTitle">
-              Lecture Title {!view && <sup className="text-pink-200">*</sup>}
+            <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="lectureTitle">
+              Lecture Title {!view && <sup className="text-pink-600">*</sup>}
             </label>
             <input
               disabled={view || loading}
@@ -164,35 +170,35 @@ export default function SubSectionModal({
               className="form-style w-full"
             />
             {errors.lectureTitle && (
-              <span className="ml-2 text-xs tracking-wide text-pink-200">
+              <span className="ml-2 text-xs font-bold text-pink-600">
                 Lecture title is required
               </span>
             )}
           </div>
           {/* Lecture Description */}
           <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor="lectureDesc">
+            <label className="text-sm font-bold text-slate-700 ml-1" htmlFor="lectureDesc">
               Lecture Description{" "}
-              {!view && <sup className="text-pink-200">*</sup>}
+              {!view && <sup className="text-pink-600">*</sup>}
             </label>
             <textarea
               disabled={view || loading}
               id="lectureDesc"
               placeholder="Enter Lecture Description"
               {...register("lectureDesc", { required: true })}
-              className="form-style resize-x-none min-h-[130px] w-full"
+              className="form-style resize-x-none min-h-[140px] w-full"
             />
             {errors.lectureDesc && (
-              <span className="ml-2 text-xs tracking-wide text-pink-200">
+              <span className="ml-2 text-xs font-bold text-pink-600">
                 Lecture Description is required
               </span>
             )}
           </div>
           {!view && (
-            <div className="flex justify-end">
+            <div className="flex justify-end pt-4 border-t border-slate-50">
               <IconBtn
                 disabled={loading}
-                text={loading ? "Loading.." : edit ? "Save Changes" : "Save"}
+                text={loading ? "Saving.." : edit ? "Save Changes" : "Save Lecture"}
               />
             </div>
           )}

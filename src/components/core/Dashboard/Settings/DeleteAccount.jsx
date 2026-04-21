@@ -19,24 +19,24 @@ export default function DeleteAccount() {
 
   return (
     <>
-      <div className="my-10 flex flex-row gap-x-5 rounded-md border-[1px] border-pink-700 bg-pink-900 p-8 px-12">
-        <div className="flex aspect-square h-14 w-14 items-center justify-center rounded-full bg-pink-700">
-          <FiTrash2 className="text-3xl text-pink-200" />
+      <div className="my-10 flex flex-row gap-x-6 rounded-[32px] border border-pink-100 bg-pink-50/50 p-8 shadow-sm">
+        <div className="flex aspect-square h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-pink-100 text-pink-600 shadow-sm">
+          <FiTrash2 className="text-3xl" />
         </div>
-        <div className="flex flex-col space-y-2">
-          <h2 className="text-lg font-semibold text-richblack-5">
+        <div className="flex flex-col space-y-3">
+          <h2 className="text-xl font-bold text-pink-900 tracking-tight">
             Delete Account
           </h2>
-          <div className="w-3/5 text-pink-25">
-            <p>Would you like to delete account?</p>
-            <p>
+          <div className="max-w-xl space-y-1">
+            <p className="text-sm font-bold text-pink-800">Would you like to delete your account?</p>
+            <p className="text-sm font-medium text-pink-600/80 leading-relaxed">
               This account may contain Paid Courses. Deleting your account is
-              permanent and will remove all the contain associated with it.
+              permanent and will remove all the content associated with it.
             </p>
           </div>
           <button
             type="button"
-            className="w-fit cursor-pointer italic text-pink-300"
+            className="w-fit cursor-pointer font-bold text-pink-600 hover:text-pink-700 transition-all underline underline-offset-4 decoration-2"
             onClick={handleDeleteAccount}
           >
             I want to delete my account.

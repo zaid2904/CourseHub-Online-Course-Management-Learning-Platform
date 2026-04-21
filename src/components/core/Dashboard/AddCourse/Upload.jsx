@@ -58,25 +58,48 @@ export default function Upload({
   }, [selectedFile, setValue])
 
   return (
-    <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
-        {label} {!viewData && <sup className="text-pink-200">*</sup>}
+    <div className="flex flex-col space-y-3">
+      <label className="text-sm font-bold text-slate-700 ml-1" htmlFor={name}>
+        {label} {!viewData && <sup className="text-pink-600">*</sup>}
       </label>
       <div
         className={`${
-          isDragActive ? "bg-richblack-600" : "bg-richblack-700"
-        } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+          isDragActive ? "bg-blue-50 border-blue-400" : "bg-slate-50 border-slate-300"
+        } relative flex min-h-[280px] cursor-pointer items-center justify-center rounded-[24px] border-2 border-dashed transition-all duration-300 hover:border-blue-400 hover:bg-blue-50/30 group overflow-hidden`}
+        {...getRootProps({
+          onDragOver: (e) => e.preventDefault(),
+          onDrop: (e) => {
+            e.preventDefault();
+            console.log("File dropped");
+          },
+        })}
       >
+        <input
+          {...getInputProps({
+            onChange: (e) => {
+              const file = e.target.files[0];
+              if (file) {
+                console.log("File selected via input:", file.name);
+                previewFile(file);
+                setSelectedFile(file);
+              }
+            }
+          })}
+          id={name}
+          ref={inputRef}
+        />
         {previewSource ? (
-          <div className="flex w-full flex-col p-6">
+          <div className="flex w-full flex-col p-6" onClick={(e) => e.stopPropagation()}>
             {!video ? (
               <img
                 src={previewSource}
                 alt="Preview"
-                className="h-full w-full rounded-md object-cover"
+                className="h-full w-full rounded-2xl object-cover shadow-sm"
               />
             ) : (
-              <Player aspectRatio="16:9" playsInline src={previewSource} />
+              <div className="rounded-2xl overflow-hidden shadow-sm aspect-video bg-black flex items-center justify-center">
+                <Player aspectRatio="16:9" playsInline src={previewSource} />
+              </div>
             )}
             {!viewData && (
               <button
@@ -86,35 +109,39 @@ export default function Upload({
                   setSelectedFile(null)
                   setValue(name, null)
                 }}
-                className="mt-3 text-richblack-400 underline"
+                className="mt-4 text-sm font-bold text-slate-500 hover:text-red-500 transition-colors underline underline-offset-4"
               >
-                Cancel
+                Remove and try again
               </button>
             )}
           </div>
         ) : (
-          <div
-            className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} ref={inputRef} />
-            <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
-              <FiUploadCloud className="text-2xl text-yellow-50" />
+          <div className="flex w-full flex-col items-center p-10 select-none">
+            <div className="grid aspect-square w-20 place-items-center rounded-3xl bg-blue-50 text-blue-600 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-blue-100">
+              <FiUploadCloud className="text-4xl" />
             </div>
-            <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
+            <p className="mt-6 max-w-[250px] text-center text-base font-bold text-slate-700 leading-snug">
               Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-              <span className="font-semibold text-yellow-50">Browse</span> a
-              file
+              <label 
+                htmlFor={name} 
+                className="font-black text-blue-600 hover:text-blue-700 hover:underline cursor-pointer transition-all"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Browse
+              </label>
             </p>
-            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
-              <li>Aspect ratio 16:9</li>
-              <li>Recommended size 1024x576</li>
-            </ul>
+            <div className="mt-8 flex flex-col items-center gap-2">
+              <ul className="flex list-disc justify-center space-x-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
+                <li>16:9 Aspect</li>
+                <li>Max 10MB</li>
+              </ul>
+              <p className="text-[10px] font-bold text-slate-300">Supported: {video ? "MP4" : "JPG, PNG"}</p>
+            </div>
           </div>
         )}
       </div>
       {errors[name] && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs font-bold text-pink-600">
           {label} is required
         </span>
       )}

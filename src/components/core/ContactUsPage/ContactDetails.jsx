@@ -27,22 +27,24 @@ const contactDetails = [
 
 const ContactDetails = () => {
   return (
-    <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
+    <div className="flex flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 lg:p-8 shadow-sm">
       {contactDetails.map((ele, i) => {
         let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
         return (
           <div
-            className="flex flex-col gap-[2px] p-3 text-sm text-richblack-200"
+            className="flex flex-col gap-1 p-4 rounded-2xl transition-colors duration-200 hover:bg-slate-50"
             key={i}
           >
-            <div className="flex flex-row items-center gap-3">
-              <Icon size={25} />
-              <h1 className="text-lg font-semibold text-richblack-5">
+            <div className="flex flex-row items-center gap-4">
+              <div className="text-blue-600">
+                <Icon size={28} />
+              </div>
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight">
                 {ele?.heading}
               </h1>
             </div>
-            <p className="font-medium">{ele?.description}</p>
-            <p className="font-semibold">{ele?.details}</p>
+            <p className="font-medium text-slate-500 ml-11">{ele?.description}</p>
+            <p className="font-bold text-slate-900 ml-11 mt-1">{ele?.details}</p>
           </div>
         )
       })}

@@ -2,44 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   overflow-x: hidden;
+  background-color: #f8fafc;
+  /* Default light background */
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Inter", "Manrope", sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
-  scrollbar-width: auto;
-  scrollbar-color: #afb2bf;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 3px;
+  width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #000814;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #afb2bf;
+  background-color: #cbd5e1;
   border-radius: 10px;
-  visibility: hidden;
+  border: 2px solid #f8fafc;
 }
 
 *:active::-webkit-scrollbar-thumb,
 *:focus::-webkit-scrollbar-thumb,
 *:hover::-webkit-scrollbar-thumb {
-  visibility: visible;
+  background-color: #94a3b8;
 }
 
 /* Hide default styling of details/summary */
-details > summary {
+details>summary {
   list-style: none;
 }
-details > summary::-webkit-details-marker {
+
+details>summary::-webkit-details-marker {
   display: none;
 }
 
@@ -59,16 +80,15 @@ details > summary::-webkit-details-marker {
   border-radius: 100%;
   left: calc(50% - 372.95px / 2 - 76.53px);
   top: calc(50% - 257.05px / 2 - 47.47px);
-  background: linear-gradient(
-    123.77deg,
-    #8a2be2 -6.46%,
-    #ffa500 59.04%,
-    #f8f8ff 124.53%
-  );
+  background: linear-gradient(123.77deg,
+      #8a2be2 -6.46%,
+      #ffa500 59.04%,
+      #f8f8ff 124.53%);
   opacity: 0.2;
   filter: blur(34px);
   transform: matrix(1, 0, -0.03, 1, 0, 0);
 }
+
 .codeblock2 {
   position: absolute;
   width: 372.95px;
@@ -76,31 +96,64 @@ details > summary::-webkit-details-marker {
   left: calc(50% - 372.95px / 2 - 76.53px);
   top: calc(50% - 257.05px / 2 - 47.47px);
   border-radius: 100%;
-  background: linear-gradient(
-    118.19deg,
-    #1fa2ff -3.62%,
-    #12d8fa 50.44%,
-    #a6ffcb 104.51%
-  );
+  background: linear-gradient(118.19deg,
+      #1fa2ff -3.62%,
+      #12d8fa 50.44%,
+      #a6ffcb 104.51%);
   opacity: 0.2;
   filter: blur(34px);
   transform: matrix(1, 0, -0.03, 1, 0, 0);
 }
-.code-border {
-  border: 2px solid;
-  border-image-slice: 1;
-  border-width: 2px;
-  border-image-source: linear-gradient(to right bottom, #ffffff38, #ffffff00);
-  background: linear-gradient(
-    111.93deg,
-    rgba(14, 26, 45, 0.24) -1.4%,
-    rgba(17, 30, 50, 0.38) 104.96%
-  );
-  /* backdrop-filter: blur(26px); */
-}
+
 .homepage_bg {
   background: url("../src/assets/Images/bghome.svg");
   /* background-size: contain; */
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-[28px] border border-slate-200/60 bg-white/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.04)];
+  }
+
+  .dashboard-shell {
+    @apply rounded-[32px] border border-slate-200 bg-white/80 shadow-[0_20px_50px_rgba(15,23,42,0.05)] backdrop-blur-xl;
+  }
+
+  .dashboard-surface {
+    @apply rounded-[24px] border border-slate-200 bg-white/70 shadow-sm backdrop-blur-xl;
+  }
+
+  .dashboard-card {
+    @apply rounded-[24px] border border-slate-200 bg-white/90 p-6 shadow-sm backdrop-blur-xl transition-shadow duration-300 hover:shadow-md;
+  }
+
+  .dashboard-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm;
+  }
+
+  .section-kicker {
+    @apply mb-4 inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-cyan-600;
+  }
+
+  .hero-title {
+    @apply font-display text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl lg:text-6xl;
+  }
+
+  .hero-copy {
+    @apply text-base leading-7 text-slate-600 sm:text-lg;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent;
+  }
 }
 
 @keyframes spinner-bulqg1 {
@@ -109,75 +162,94 @@ details > summary::-webkit-details-marker {
   }
 
   12.5% {
-    clip-path: polygon(
-      50% 50%,
-      0 0,
-      50% 0%,
-      100% 0%,
-      100% 0%,
-      100% 0%,
-      100% 0%
-    );
+    clip-path: polygon(50% 50%,
+        0 0,
+        50% 0%,
+        100% 0%,
+        100% 0%,
+        100% 0%,
+        100% 0%);
   }
 
   25% {
-    clip-path: polygon(
-      50% 50%,
-      0 0,
-      50% 0%,
-      100% 0%,
-      100% 100%,
-      100% 100%,
-      100% 100%
-    );
+    clip-path: polygon(50% 50%,
+        0 0,
+        50% 0%,
+        100% 0%,
+        100% 100%,
+        100% 100%,
+        100% 100%);
   }
 
   50% {
-    clip-path: polygon(
-      50% 50%,
-      0 0,
-      50% 0%,
-      100% 0%,
-      100% 100%,
-      50% 100%,
-      0% 100%
-    );
+    clip-path: polygon(50% 50%,
+        0 0,
+        50% 0%,
+        100% 0%,
+        100% 100%,
+        50% 100%,
+        0% 100%);
   }
 
   62.5% {
-    clip-path: polygon(
-      50% 50%,
-      100% 0,
-      100% 0%,
-      100% 0%,
-      100% 100%,
-      50% 100%,
-      0% 100%
-    );
+    clip-path: polygon(50% 50%,
+        100% 0,
+        100% 0%,
+        100% 0%,
+        100% 100%,
+        50% 100%,
+        0% 100%);
   }
 
   75% {
-    clip-path: polygon(
-      50% 50%,
-      100% 100%,
-      100% 100%,
-      100% 100%,
-      100% 100%,
-      50% 100%,
-      0% 100%
-    );
+    clip-path: polygon(50% 50%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        50% 100%,
+        0% 100%);
   }
 
   100% {
-    clip-path: polygon(
-      50% 50%,
-      50% 100%,
-      50% 100%,
-      50% 100%,
-      50% 100%,
-      50% 100%,
-      0% 100%
-    );
+    clip-path: polygon(50% 50%,
+        50% 100%,
+        50% 100%,
+        50% 100%,
+        50% 100%,
+        50% 100%,
+        0% 100%);
+  }
+}
+
+
+@keyframes spinner-bulqg1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%);
+  }
+
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%);
+  }
+
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%);
+  }
+
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%);
   }
 }
 
@@ -201,46 +273,39 @@ details > summary::-webkit-details-marker {
 
 /* For conditional coloring of icons in dashboard sidebar */
 .active-icon {
-  fill: #ffd60a !important;
-  color: #ffd60a !important;
+  fill: #3b82f6 !important;
+  /* blue-500 for light theme active state */
+  color: #3b82f6 !important;
 }
 
 .inactive-icon {
-  fill: #838894;
-  color: #838894;
+  fill: #64748b;
+  /* slate-500 */
+  color: #64748b;
 }
 
 /* Buttons */
 .yellowButton {
-  @apply cursor-pointer rounded-md bg-yellow-50 px-[20px] py-[8px] font-semibold text-richblack-900;
+  @apply cursor-pointer rounded-md bg-yellow-100 px-[20px] py-[8px] font-semibold text-yellow-800 transition-all duration-200 hover:bg-yellow-200;
 }
-
-/* Swiper CSS Starts */
-/* .swiper {
-  max-width: 1200px;
-  width: 91.66%;
-  height: 185px;
-  margin: 50px 0px;
-} */
 
 .swiper-slide {
   width: 100%;
   height: 100%;
 }
-/* .swiper-slide {
-  @apply bg-richblack-800 text-richblack-25 p-3 text-[14px];
-} */
-/* Swiper CSS Ends */
 
 .blackButton {
-  @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5;
+  @apply cursor-pointer rounded-md bg-slate-800 px-[20px] py-[8px] font-semibold text-white transition-all duration-200 hover:bg-slate-900;
 }
+
 .lable-style {
-  @apply text-[14px] text-richblack-5;
+  @apply text-[14px] text-slate-700 font-medium;
 }
+
 .form-style {
-  @apply rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+  @apply rounded-2xl border border-slate-200 bg-white p-3 text-[16px] leading-[24px] text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-blue-500/50 focus:outline-none focus:ring-4 focus:ring-blue-500/10 transition-all;
 }
+
 .section_heading {
-  @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
+  @apply text-2xl font-bold text-slate-900 lg:text-4xl;
 }

@@ -115,7 +115,7 @@ function CourseDetails() {
 
   return (
     <>
-      <div className={`relative w-full bg-richblack-800`}>
+      <div className={`relative w-full bg-slate-50 border-b border-slate-200`}>
         {/* Hero Section */}
         <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
           <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
@@ -128,19 +128,19 @@ function CourseDetails() {
               />
             </div>
             <div
-              className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-richblack-5`}
+              className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-slate-900`}
             >
               <div>
-                <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
+                <p className="text-4xl font-extrabold text-slate-900 sm:text-[42px] tracking-tight">
                   {courseName}
                 </p>
               </div>
-              <p className={`text-richblack-200`}>{courseDescription}</p>
-              <div className="text-md flex flex-wrap items-center gap-2">
-                <span className="text-yellow-25">{avgReviewCount}</span>
+              <p className={`text-slate-600 leading-relaxed max-w-[700px]`}>{courseDescription}</p>
+              <div className="text-md flex flex-wrap items-center gap-2 font-medium">
+                <span className="text-yellow-600">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span>{`(${ratingAndReviews.length} reviews)`}</span>
-                <span>{`${studentsEnroled.length} students enrolled`}</span>
+                <span className="text-slate-500">{`(${ratingAndReviews.length} reviews)`}</span>
+                <span className="text-slate-500">{`${studentsEnroled.length} students enrolled`}</span>
               </div>
               <div>
                 <p className="">
@@ -158,8 +158,8 @@ function CourseDetails() {
                 </p>
               </div>
             </div>
-            <div className="flex w-full flex-col gap-4 border-y border-y-richblack-500 py-4 lg:hidden">
-              <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
+            <div className="flex w-full flex-col gap-4 border-y border-slate-200 py-4 lg:hidden">
+              <p className="space-x-3 pb-4 text-3xl font-bold text-slate-900">
                 Rs. {price}
               </p>
               <button className="yellowButton" onClick={handleBuyCourse}>
@@ -178,11 +178,11 @@ function CourseDetails() {
           </div>
         </div>
       </div>
-      <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
+      <div className="mx-auto box-content px-4 text-start text-slate-900 lg:w-[1260px]">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What will you learn section */}
-          <div className="my-8 border border-richblack-600 p-8">
-            <p className="text-3xl font-semibold">What you'll learn</p>
+          <div className="my-8 border border-slate-200 bg-white rounded-2xl p-8 shadow-sm">
+            <p className="text-3xl font-bold tracking-tight text-slate-900">What you'll learn</p>
             <div className="mt-5">
               <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
             </div>
@@ -193,7 +193,7 @@ function CourseDetails() {
             <div className="flex flex-col gap-3">
               <p className="text-[28px] font-semibold">Course Content</p>
               <div className="flex flex-wrap justify-between gap-2">
-                <div className="flex gap-2">
+                <div className="flex gap-2 text-slate-500">
                   <span>
                     {courseContent.length} {`section(s)`}
                   </span>
@@ -204,7 +204,7 @@ function CourseDetails() {
                 </div>
                 <div>
                   <button
-                    className="text-yellow-25"
+                    className="text-blue-600 font-semibold hover:text-blue-700"
                     onClick={() => setIsActive([])}
                   >
                     Collapse all sections
@@ -226,8 +226,8 @@ function CourseDetails() {
             </div>
 
             {/* Author Details */}
-            <div className="mb-12 py-4">
-              <p className="text-[28px] font-semibold">Author</p>
+            <div className="mb-12 py-4 border-t border-slate-200 mt-8">
+              <p className="text-[28px] font-bold text-slate-900">Author</p>
               <div className="flex items-center gap-4 py-4">
                 <img
                   src={
@@ -236,11 +236,11 @@ function CourseDetails() {
                       : `https://api.dicebear.com/5.x/initials/svg?seed=${instructor.firstName} ${instructor.lastName}`
                   }
                   alt="Author"
-                  className="h-14 w-14 rounded-full object-cover"
+                  className="h-14 w-14 rounded-full object-cover ring-2 ring-slate-100"
                 />
-                <p className="text-lg">{`${instructor.firstName} ${instructor.lastName}`}</p>
+                <p className="text-lg font-semibold text-slate-900">{`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>
-              <p className="text-richblack-50">
+              <p className="text-slate-600 leading-relaxed">
                 {instructor?.additionalDetails?.about}
               </p>
             </div>
