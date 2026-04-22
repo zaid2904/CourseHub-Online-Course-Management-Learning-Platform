@@ -1,4 +1,3 @@
-import React from "react"
 import * as Icon1 from "react-icons/bi"
 import * as Icon3 from "react-icons/hi2"
 import * as Icon2 from "react-icons/io5"
@@ -8,7 +7,7 @@ const contactDetails = [
     icon: "HiChatBubbleLeftRight",
     heading: "Chat on us",
     description: "Our friendly team is here to help.",
-    details: "info@studynotion.com",
+    details: "info@cousehub.com",
   },
   {
     icon: "BiWorld",
