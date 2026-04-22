@@ -38,7 +38,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId])
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-white/10 bg-slate-950/75 backdrop-blur-xl">
+    <div className="viewcourse-sidebar flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-white/10 bg-slate-950/75 backdrop-blur-xl">
       <div className="mx-4 flex flex-col gap-4 border-b border-white/10 py-5">
         <div className="flex w-full items-center gap-3">
           <button
@@ -57,7 +57,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
           />
         </div>
 
-        <div className="dashboard-surface p-4">
+        <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-br from-slate-900/95 via-slate-900/80 to-cyan-950/60 p-4 shadow-[0_14px_35px_rgba(8,47,73,0.25)]">
           <p className="text-lg font-semibold text-white">
             {courseEntireData?.courseName}
           </p>
@@ -65,6 +65,21 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
             {completedLectures?.length} of {totalNoOfLectures} lessons
             completed
           </p>
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300 transition-all duration-500"
+              style={{
+                width: `${
+                  totalNoOfLectures
+                    ? Math.min(
+                        100,
+                        Math.round((completedLectures?.length / totalNoOfLectures) * 100)
+                      )
+                    : 0
+                }%`,
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -72,11 +87,12 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
         <div className="space-y-3">
           {courseSectionData.map((course, index) => (
             <div
-              className="overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03]"
+              className="viewcourse-fade-up overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-cyan-300/30"
+              style={{ animationDelay: `${index * 80}ms` }}
               key={index}
             >
               <button
-                className="flex w-full items-center justify-between px-5 py-4 text-left"
+                className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors duration-300 hover:bg-white/[0.03]"
                 onClick={() => setActiveStatus(course?._id)}
               >
                 <div className="w-[78%] text-sm font-semibold text-white">
@@ -95,9 +111,9 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                 <div className="border-t border-white/10 p-2">
                   {course.subSection.map((topic, i) => (
                     <button
-                      className={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition duration-300 ${
+                      className={`viewcourse-item-glow flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition duration-300 ${
                         videoBarActive === topic._id
-                          ? "bg-cyan-300 text-slate-950"
+                          ? "bg-gradient-to-r from-cyan-300 to-sky-300 text-slate-950 shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
                           : "text-slate-200 hover:bg-white/5"
                       }`}
                       key={i}

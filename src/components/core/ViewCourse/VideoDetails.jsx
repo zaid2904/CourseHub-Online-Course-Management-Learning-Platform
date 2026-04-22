@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 
-import "video-react/dist/video-react.css"
 import { useLocation } from "react-router-dom"
 import { BigPlayButton, Player } from "video-react"
+import "video-react/dist/video-react.css"
 
 import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI"
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice"
@@ -170,80 +170,80 @@ const VideoDetails = () => {
 
   return (
     <div className="flex flex-col gap-6 text-white">
-      {!videoData ? (
-        <img
-          src={previewSource}
-          alt="Preview"
-          className="h-full w-full rounded-[28px] object-cover"
-        />
-      ) : (
-        <Player
-          ref={playerRef}
-          aspectRatio="16:9"
-          playsInline
-          onEnded={() => setVideoEnded(true)}
-          src={videoData?.videoUrl}
-        >
-          <BigPlayButton position="center" />
-          {/* Render When Video Ends */}
-          {videoEnded && (
-            <div
-              style={{
-                backgroundImage:
-                  "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
-              }}
-              className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+      <div className="viewcourse-player-shell">
+        <div className="relative aspect-video overflow-hidden rounded-[28px]">
+          {!videoData ? (
+            <img
+              src={previewSource}
+              alt="Preview"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Player
+              ref={playerRef}
+              fluid={false}
+              width="100%"
+              height="100%"
+              className="viewcourse-player"
+              playsInline
+              onEnded={() => setVideoEnded(true)}
+              src={videoData?.videoUrl}
             >
-              {!completedLectures.includes(subSectionId) && (
-                <IconBtn
-                  disabled={loading}
-                  onclick={() => handleLectureCompletion()}
-                  text={!loading ? "Mark As Completed" : "Loading..."}
-                  customClasses="text-xl max-w-max px-4 mx-auto"
-                />
+              <BigPlayButton position="center" />
+              {/* Render controls and progress actions after the lecture ends */}
+              {videoEnded && (
+                <div className="viewcourse-overlay absolute inset-0 z-[100] grid place-content-center bg-gradient-to-t from-black via-black/70 to-black/15 p-4 font-inter">
+                  {!completedLectures.includes(subSectionId) && (
+                    <IconBtn
+                      disabled={loading}
+                      onclick={() => handleLectureCompletion()}
+                      text={!loading ? "Mark As Completed" : "Loading..."}
+                      customClasses="viewcourse-overlay-btn text-xl max-w-max px-4 mx-auto"
+                    />
+                  )}
+                  <IconBtn
+                    disabled={loading}
+                    onclick={() => {
+                      if (playerRef?.current) {
+                        playerRef?.current?.seek(0)
+                        setVideoEnded(false)
+                      }
+                    }}
+                    text="Rewatch"
+                    customClasses="viewcourse-overlay-btn text-xl max-w-max px-4 mx-auto mt-2"
+                  />
+                  <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
+                    {!isFirstVideo() && (
+                      <button
+                        disabled={loading}
+                        onClick={goToPrevVideo}
+                        className="viewcourse-pill-btn"
+                      >
+                        Prev
+                      </button>
+                    )}
+                    {!isLastVideo() && (
+                      <button
+                        disabled={loading}
+                        onClick={goToNextVideo}
+                        className="viewcourse-pill-btn"
+                      >
+                        Next
+                      </button>
+                    )}
+                  </div>
+                </div>
               )}
-              <IconBtn
-                disabled={loading}
-                onclick={() => {
-                  if (playerRef?.current) {
-                    // set the current time of the video to 0
-                    playerRef?.current?.seek(0)
-                    setVideoEnded(false)
-                  }
-                }}
-                text="Rewatch"
-                customClasses="text-xl max-w-max px-4 mx-auto mt-2"
-              />
-              <div className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
-                {!isFirstVideo() && (
-                  <button
-                    disabled={loading}
-                    onClick={goToPrevVideo}
-                    className="blackButton"
-                  >
-                    Prev
-                  </button>
-                )}
-                {!isLastVideo() && (
-                  <button
-                    disabled={loading}
-                    onClick={goToNextVideo}
-                    className="blackButton"
-                  >
-                    Next
-                  </button>
-                )}
-              </div>
-            </div>
+            </Player>
           )}
-        </Player>
-      )}
+        </div>
+      </div>
 
-      <div className="dashboard-surface p-6">
-        <h1 className="font-display text-3xl font-semibold text-white">
+      <div className="dashboard-surface border-white/40 bg-white/75 p-6">
+        <h1 className="font-display text-3xl font-semibold text-slate-900">
           {videoData?.title}
         </h1>
-        <p className="pt-3 text-slate-300">{videoData?.description}</p>
+        <p className="pt-3 leading-7 text-slate-600">{videoData?.description}</p>
       </div>
     </div>
   )
