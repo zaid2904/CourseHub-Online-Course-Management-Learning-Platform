@@ -36,9 +36,9 @@ export default function ViewCourse() {
 
   return (
     <>
-      <div className="relative flex min-h-[calc(100vh-5rem)] bg-[linear-gradient(180deg,#020617_0%,#08111f_100%)]">
-        <div className="pointer-events-none absolute -left-20 top-14 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="relative flex min-h-[calc(100vh-5rem)] bg-[linear-gradient(180deg,#f8fafc_0%,#eef2ff_100%)]">
+        <div className="pointer-events-none absolute -left-20 top-14 h-72 w-72 rounded-full bg-cyan-300/25 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-20 h-80 w-80 rounded-full bg-indigo-300/20 blur-3xl" />
         <VideoDetailsSidebar setReviewModal={setReviewModal} />
         <div className="h-[calc(100vh-5rem)] flex-1 overflow-auto">
           <div className="mx-4 py-6 lg:mx-6">

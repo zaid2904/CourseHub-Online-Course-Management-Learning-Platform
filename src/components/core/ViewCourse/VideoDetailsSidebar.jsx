@@ -38,14 +38,14 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId])
 
   return (
-    <div className="viewcourse-sidebar flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-white/10 bg-slate-950/75 backdrop-blur-xl">
-      <div className="mx-4 flex flex-col gap-4 border-b border-white/10 py-5">
+    <div className="viewcourse-sidebar flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-slate-200/90 backdrop-blur-xl">
+      <div className="mx-4 flex flex-col gap-4 border-b border-slate-200/90 py-5">
         <div className="flex w-full items-center gap-3">
           <button
             onClick={() => {
               navigate(`/dashboard/enrolled-courses`)
             }}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition duration-300 hover:bg-white/10"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-sm transition duration-300 hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-200"
             title="back"
           >
             <IoIosArrowBack size={24} />
@@ -57,17 +57,17 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
           />
         </div>
 
-        <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-br from-slate-900/95 via-slate-900/80 to-cyan-950/60 p-4 shadow-[0_14px_35px_rgba(8,47,73,0.25)]">
-          <p className="text-lg font-semibold text-white">
+        <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-white via-slate-50 to-blue-50/70 p-4 shadow-[0_10px_26px_rgba(15,23,42,0.08)]">
+          <p className="text-lg font-semibold text-slate-900">
             {courseEntireData?.courseName}
           </p>
-          <p className="mt-2 text-sm text-slate-300">
+          <p className="mt-2 text-sm text-slate-600">
             {completedLectures?.length} of {totalNoOfLectures} lessons
             completed
           </p>
-          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300 transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 transition-all duration-500"
               style={{
                 width: `${
                   totalNoOfLectures
@@ -87,15 +87,15 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
         <div className="space-y-3">
           {courseSectionData.map((course, index) => (
             <div
-              className="viewcourse-fade-up overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03] transition-all duration-300 hover:border-cyan-300/30"
+              className="viewcourse-fade-up overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-300 hover:border-blue-200 hover:shadow-[0_8px_20px_rgba(15,23,42,0.06)]"
               style={{ animationDelay: `${index * 80}ms` }}
               key={index}
             >
               <button
-                className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors duration-300 hover:bg-white/[0.03]"
+                className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors duration-300 hover:bg-slate-50"
                 onClick={() => setActiveStatus(course?._id)}
               >
-                <div className="w-[78%] text-sm font-semibold text-white">
+                <div className="w-[78%] text-sm font-semibold text-slate-800">
                   {course?.sectionName}
                 </div>
                 <span
@@ -103,18 +103,18 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                     activeStatus === course?._id ? "rotate-0" : "rotate-180"
                   }`}
                 >
-                  <BsChevronDown className="text-slate-300" />
+                  <BsChevronDown className="text-slate-500" />
                 </span>
               </button>
 
               {activeStatus === course?._id && (
-                <div className="border-t border-white/10 p-2">
+                <div className="border-t border-slate-200 p-2">
                   {course.subSection.map((topic, i) => (
                     <button
                       className={`viewcourse-item-glow flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition duration-300 ${
                         videoBarActive === topic._id
-                          ? "bg-gradient-to-r from-cyan-300 to-sky-300 text-slate-950 shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
-                          : "text-slate-200 hover:bg-white/5"
+                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_10px_20px_rgba(37,99,235,0.28)]"
+                          : "text-slate-700 hover:bg-slate-100"
                       }`}
                       key={i}
                       onClick={() => {
@@ -128,7 +128,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                         type="checkbox"
                         checked={completedLectures.includes(topic?._id)}
                         onChange={() => {}}
-                        className="h-4 w-4 accent-slate-950"
+                        className="h-4 w-4 accent-blue-600"
                       />
                       <span>{topic.title}</span>
                     </button>

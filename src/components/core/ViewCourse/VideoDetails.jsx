@@ -169,7 +169,7 @@ const VideoDetails = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 text-white">
+    <div className="flex flex-col gap-6 text-slate-900">
       <div className="viewcourse-player-shell">
         <div className="relative aspect-video overflow-hidden rounded-[28px]">
           {!videoData ? (
@@ -192,7 +192,7 @@ const VideoDetails = () => {
               <BigPlayButton position="center" />
               {/* Render controls and progress actions after the lecture ends */}
               {videoEnded && (
-                <div className="viewcourse-overlay absolute inset-0 z-[100] grid place-content-center bg-gradient-to-t from-black via-black/70 to-black/15 p-4 font-inter">
+                <div className="viewcourse-overlay absolute inset-0 z-[100] grid place-content-center bg-gradient-to-t from-slate-50/95 via-slate-50/80 to-slate-50/30 p-4 font-inter text-slate-900">
                   {!completedLectures.includes(subSectionId) && (
                     <IconBtn
                       disabled={loading}
@@ -239,7 +239,7 @@ const VideoDetails = () => {
         </div>
       </div>
 
-      <div className="dashboard-surface border-white/40 bg-white/75 p-6">
+      <div className="dashboard-surface border-slate-200 bg-white p-6 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
         <h1 className="font-display text-3xl font-semibold text-slate-900">
           {videoData?.title}
         </h1>

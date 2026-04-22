@@ -43,12 +43,15 @@ export default function CourseReviewModal({ setReviewModal }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-slate-900/20 backdrop-blur-sm">
-      <div className="my-10 w-11/12 max-w-[700px] rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-slate-900/15 backdrop-blur-sm">
+      <div className="my-10 w-11/12 max-w-[700px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_16px_44px_rgba(15,23,42,0.14)]">
         {/* Modal Header */}
         <div className="flex items-center justify-between bg-slate-50 p-6 border-b border-slate-200">
           <p className="text-xl font-bold text-slate-900 tracking-tight">Add Review</p>
-          <button onClick={() => setReviewModal(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
+          <button
+            onClick={() => setReviewModal(false)}
+            className="rounded-full p-1 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          >
             <RxCross2 className="text-2xl" />
           </button>
         </div>
@@ -107,7 +110,7 @@ export default function CourseReviewModal({ setReviewModal }) {
             <div className="mt-8 flex w-full justify-end gap-x-3">
               <button
                 onClick={() => setReviewModal(false)}
-                className="flex cursor-pointer items-center gap-x-2 rounded-full bg-slate-100 py-2.5 px-6 font-bold text-slate-600 hover:bg-slate-200 transition-all duration-200"
+                className="flex cursor-pointer items-center gap-x-2 rounded-full border border-slate-200 bg-white py-2.5 px-6 font-bold text-slate-700 shadow-sm transition-all duration-200 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
               >
                 Cancel
               </button>
