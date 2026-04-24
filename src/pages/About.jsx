@@ -1,4 +1,3 @@
-import React from "react"
 
 import FoundingStory from "../assets/Images/FoundingStory.png"
 import BannerImage1 from "../assets/Images/aboutus1.webp"
@@ -17,7 +16,7 @@ const About = () => {
     <div>
       <section className="bg-slate-50 border-b border-slate-200">
         <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-slate-900">
-          <header className="mx-auto py-20 text-4xl font-extrabold lg:w-[70%] tracking-tight">
+          <header className="mx-auto py-14 text-3xl font-extrabold tracking-tight sm:py-20 sm:text-4xl lg:w-[70%]">
             Driving Innovation in Online Education for a
             <HighlightText text={"Brighter Future"} />
             <p className="mx-auto mt-3 text-center text-base font-medium text-slate-600 lg:w-[95%]">
@@ -27,11 +26,11 @@ const About = () => {
               and nurturing a vibrant learning community.
             </p>
           </header>
-          <div className="sm:h-[70px] lg:h-[150px]"></div>
+          <div className="h-[40px] sm:h-[70px] lg:h-[150px]"></div>
           <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
-            <img src={BannerImage1} alt="" />
-            <img src={BannerImage2} alt="" />
-            <img src={BannerImage3} alt="" />
+            <img src={BannerImage1} alt="About banner 1" className="h-full w-full rounded-xl object-cover" />
+            <img src={BannerImage2} alt="About banner 2" className="h-full w-full rounded-xl object-cover" />
+            <img src={BannerImage3} alt="About banner 3" className="h-full w-full rounded-xl object-cover" />
           </div>
         </div>
       </section>
@@ -68,11 +67,11 @@ const About = () => {
               </p>
             </div>
 
-            <div>
+            <div className="w-full lg:w-auto">
               <img
                 src={FoundingStory}
-                alt=""
-                className="shadow-[0_0_40px_0] shadow-blue-500/10 rounded-3xl"
+                alt="Founding story"
+                className="w-full max-w-[560px] rounded-3xl shadow-[0_0_40px_0] shadow-blue-500/10"
               />
             </div>
           </div>

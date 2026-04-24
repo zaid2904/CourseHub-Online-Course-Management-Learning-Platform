@@ -8,16 +8,17 @@ function Template({ title, description1, description2, image, formType }) {
   const { loading } = useSelector((state) => state.auth)
 
   return (
-    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+    <div className="page-shell grid min-h-[calc(100vh-5rem)] place-items-center px-0 py-8 sm:py-12">
       {loading ? (
         <div className="spinner"></div>
       ) : (
-        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col-reverse justify-between gap-y-12 py-12 md:flex-row md:gap-y-0 md:gap-x-12">
-          <div className="mx-auto w-11/12 max-w-[450px] md:mx-0">
-            <h1 className="text-[2.25rem] font-extrabold leading-[2.75rem] text-slate-900 tracking-tight">
+        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col-reverse items-stretch gap-6 md:flex-row md:gap-10">
+          <div className="form-shell mx-auto w-full max-w-[520px] md:mx-0">
+            <p className="section-kicker mb-3">Welcome</p>
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-[2.25rem] sm:leading-[2.75rem]">
               {title}
             </h1>
-            <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
+            <p className="mt-4 text-base leading-7 sm:text-[1.125rem] sm:leading-[1.75rem]">
               <span className="text-slate-600 font-medium">{description1}</span>{" "}
               <span className="font-edu-sa font-bold italic text-blue-600">
                 {description2}
@@ -25,13 +26,17 @@ function Template({ title, description1, description2, image, formType }) {
             </p>
             {formType === "signup" ? <SignupForm /> : <LoginForm />}
           </div>
-          <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
+
+          <div className="section-panel relative mx-auto hidden w-full max-w-[520px] overflow-hidden p-4 md:block md:mx-0">
+            <div className="absolute -left-20 top-10 h-48 w-48 rounded-full bg-cyan-100/70 blur-3xl" />
+            <div className="absolute -right-16 bottom-4 h-44 w-44 rounded-full bg-indigo-100/70 blur-3xl" />
             <img
               src={frameImg}
               alt="Pattern"
               width={558}
               height={504}
               loading="lazy"
+              className="w-full rounded-2xl"
             />
             <img
               src={image}
@@ -39,7 +44,7 @@ function Template({ title, description1, description2, image, formType }) {
               width={558}
               height={504}
               loading="lazy"
-              className="absolute -top-4 right-4 z-10"
+              className="absolute right-4 top-4 z-10 w-[94%] rounded-2xl"
             />
           </div>
         </div>

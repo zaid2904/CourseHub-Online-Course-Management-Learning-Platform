@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { BiArrowBack } from "react-icons/bi"
+import { HiOutlineMail } from "react-icons/hi"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -17,46 +18,53 @@ function ForgotPassword() {
   }
 
   return (
-    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
+    <div className="page-shell grid min-h-[calc(100vh-5rem)] place-items-center px-0 py-8 sm:py-12">
       {loading ? (
         <div className="spinner"></div>
       ) : (
-        <div className="max-w-[500px] p-4 lg:p-8">
-          <h1 className="text-[2.25rem] font-extrabold leading-[2.75rem] text-slate-900 tracking-tight">
+        <div className="form-shell w-11/12 max-w-[520px]">
+          <p className="section-kicker mb-3">Security</p>
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-[2.25rem] sm:leading-[2.75rem]">
             {!emailSent ? "Reset your password" : "Check email"}
           </h1>
-          <p className="my-4 text-[1.125rem] leading-[1.625rem] text-slate-600 font-medium">
+          <p className="my-4 text-base font-medium leading-7 text-slate-600 sm:text-[1.125rem] sm:leading-[1.75rem]">
             {!emailSent
               ? "Have no fear. We'll email you instructions to reset your password. If you don't have access to your email we can try account recovery"
               : `We have sent the reset email to ${email}`}
           </p>
+
           <form onSubmit={handleOnSubmit}>
             {!emailSent && (
               <label className="w-full">
-                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-slate-700 font-medium">
+                <p className="input-label">
                   Email Address <sup className="text-pink-600">*</sup>
                 </p>
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter email address"
-                  className="form-style w-full"
-                />
+                <div className="relative">
+                  <HiOutlineMail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter email address"
+                    className="form-style w-full !pl-11"
+                  />
+                </div>
               </label>
             )}
+
             <button
               type="submit"
-              className="mt-6 w-full rounded-full bg-blue-600 py-3 px-6 font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300"
+              className="btn-primary mt-6 min-h-[48px] w-full text-base font-bold"
             >
               {!emailSent ? "Submit" : "Resend Email"}
             </button>
           </form>
+
           <div className="mt-6 flex items-center justify-between">
             <Link to="/login">
-              <p className="flex items-center gap-x-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+              <p className="flex items-center gap-x-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700">
                 <BiArrowBack /> Back To Login
               </p>
             </Link>

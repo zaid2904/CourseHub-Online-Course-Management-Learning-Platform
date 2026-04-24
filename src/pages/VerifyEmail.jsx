@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import OtpInput from "react-otp-input";
-import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
+import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { sendOtp, signUp } from "../services/operations/authAPI";
-import { useNavigate } from "react-router-dom";
 
 function VerifyEmail() {
   const [otp, setOtp] = useState("");
@@ -47,19 +46,21 @@ function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] grid place-items-center">
+    <div className="page-shell grid min-h-[calc(100vh-5rem)] place-items-center px-0 py-8 sm:py-12">
       {loading ? (
         <div>
           <div className="spinner"></div>
         </div>
       ) : (
-        <div className="max-w-[500px] p-4 lg:p-8">
-          <h1 className="text-slate-900 font-extrabold text-[2.25rem] leading-[2.75rem] tracking-tight">
+        <div className="form-shell w-11/12 max-w-[520px]">
+          <p className="section-kicker mb-3">Verification</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[2.25rem] sm:leading-[2.75rem]">
             Verify Email
           </h1>
-          <p className="text-[1.125rem] leading-[1.625rem] my-4 text-slate-600 font-medium">
+          <p className="my-4 text-base font-medium leading-7 text-slate-600 sm:text-[1.125rem] sm:leading-[1.75rem]">
             A verification code has been sent to you. Enter the code below
           </p>
+
           <form onSubmit={handleVerifyAndSignup}>
             <OtpInput
               value={otp}
@@ -69,29 +70,31 @@ function VerifyEmail() {
                 <input
                   {...props}
                   placeholder="-"
-                  className="w-[48px] lg:w-[60px] border border-slate-200 bg-white rounded-xl text-slate-900 aspect-square text-center focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-bold text-xl shadow-sm"
+                  className="aspect-square w-[44px] rounded-xl border border-slate-200 bg-white text-center text-lg font-bold text-slate-900 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 sm:w-[52px] lg:w-[60px]"
                 />
               )}
               containerStyle={{
                 justifyContent: "space-between",
-                gap: "0 6px",
+                gap: "0 8px",
               }}
             />
+
             <button
               type="submit"
-              className="w-full bg-blue-600 py-3 px-6 rounded-full mt-8 font-bold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all duration-300"
+              className="btn-primary mt-8 min-h-[48px] w-full text-base font-bold"
             >
               Verify Email
             </button>
           </form>
+
           <div className="mt-6 flex items-center justify-between">
             <Link to="/signup">
-              <p className="text-blue-600 font-semibold flex items-center gap-x-2 hover:text-blue-700 transition-colors">
+              <p className="flex items-center gap-x-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700">
                 <BiArrowBack /> Back To Signup
               </p>
             </Link>
             <button
-              className="flex items-center text-slate-600 font-semibold gap-x-2 hover:text-blue-600 transition-colors"
+              className="inline-flex min-h-[40px] items-center gap-x-2 rounded-full px-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600"
               onClick={() => dispatch(sendOtp(signupData.email))}
             >
               <RxCountdownTimer />

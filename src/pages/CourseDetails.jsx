@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { BiInfoCircle } from "react-icons/bi"
 import { HiOutlineGlobeAlt } from "react-icons/hi"
 import { ReactMarkdown } from "react-markdown/lib/react-markdown"
@@ -131,7 +131,7 @@ function CourseDetails() {
               className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-slate-900`}
             >
               <div>
-                <p className="text-4xl font-extrabold text-slate-900 sm:text-[42px] tracking-tight">
+                <p className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[42px]">
                   {courseName}
                 </p>
               </div>
@@ -162,14 +162,14 @@ function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-bold text-slate-900">
                 Rs. {price}
               </p>
-              <button className="yellowButton" onClick={handleBuyCourse}>
+              <button className="yellowButton w-full" onClick={handleBuyCourse}>
                 Enroll Now
               </button>
-              <button className="blackButton">Add to Cart</button>
+              <button className="blackButton w-full">Add to Cart</button>
             </div>
           </div>
           {/* Courses Card */}
-          <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block">
+          <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-full max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute lg:w-1/3 lg:block">
             <CourseDetailsCard
               course={response?.data?.courseDetails}
               setConfirmationModal={setConfirmationModal}
@@ -181,7 +181,7 @@ function CourseDetails() {
       <div className="mx-auto box-content px-4 text-start text-slate-900 lg:w-[1260px]">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What will you learn section */}
-          <div className="my-8 border border-slate-200 bg-white rounded-2xl p-8 shadow-sm">
+          <div className="my-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
             <p className="text-3xl font-bold tracking-tight text-slate-900">What you'll learn</p>
             <div className="mt-5">
               <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>

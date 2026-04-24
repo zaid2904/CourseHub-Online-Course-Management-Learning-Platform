@@ -26,16 +26,16 @@ const contactDetails = [
 
 const ContactDetails = () => {
   return (
-    <div className="flex flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 lg:p-8 shadow-sm">
+    <div className="section-panel flex flex-col gap-5 p-6 lg:p-8">
       {contactDetails.map((ele, i) => {
         let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
         return (
           <div
-            className="flex flex-col gap-1 p-4 rounded-2xl transition-colors duration-200 hover:bg-slate-50"
+            className="group flex flex-col gap-1 rounded-2xl border border-transparent p-4 transition-all duration-200 hover:border-slate-200 hover:bg-slate-50"
             key={i}
           >
             <div className="flex flex-row items-center gap-4">
-              <div className="text-blue-600">
+              <div className="text-blue-600 transition-transform duration-300 group-hover:scale-105">
                 <Icon size={28} />
               </div>
               <h1 className="text-xl font-bold text-slate-900 tracking-tight">

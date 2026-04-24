@@ -21,15 +21,18 @@ export default function SidebarLink({ link, iconName }) {
         matchRoute(link.path)
           ? "bg-blue-600 font-bold text-white shadow-lg shadow-blue-500/20"
           : "font-bold text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-      }`}
+      } focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200`}
     >
+      {matchRoute(link.path) && (
+        <span className="absolute left-0 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-white/90" />
+      )}
       <div className="flex items-center gap-x-3">
         {/* Icon Goes Here */}
         <Icon
           className={`text-xl ${
             matchRoute(link.path)
               ? "text-white"
-              : "text-slate-400 group-hover:text-slate-900 transition-colors"
+              : "text-slate-400 transition-colors group-hover:text-slate-900"
           }`}
         />
         <span>{link.name}</span>

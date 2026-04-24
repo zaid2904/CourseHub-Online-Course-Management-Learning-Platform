@@ -1,6 +1,5 @@
-import React from "react";
-import HighlightText from "../../../components/core/HomePage/HighlightText";
 import CTAButton from "../../../components/core/HomePage/Button";
+import HighlightText from "../../../components/core/HomePage/HighlightText";
 
 const LearningGridArray = [
   {
@@ -46,16 +45,16 @@ const LearningGridArray = [
 
 const LearningGrid = () => {
   return (
-    <div className="grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
+    <div className="mb-12 grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-slate-200 xl:mx-auto xl:w-fit xl:grid-cols-4">
       {LearningGridArray.map((card, i) => {
         return (
           <div
             key={i}
-            className={`${i === 0 && "xl:col-span-2 xl:h-[294px]"}  ${
+            className={`${i === 0 && "xl:col-span-2"} ${
               card.order % 2 === 1
-                ? "bg-slate-50 h-[294px] border border-slate-100"
+                ? "min-h-[240px] border border-slate-100 bg-slate-50"
                 : card.order % 2 === 0
-                ? "bg-white h-[294px] border border-slate-100"
+                ? "min-h-[240px] border border-slate-100 bg-white"
                 : "bg-transparent"
             } ${card.order === 3 && "xl:col-start-2"}  `}
           >

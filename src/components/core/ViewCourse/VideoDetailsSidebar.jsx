@@ -38,7 +38,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   }, [courseSectionData, courseEntireData, location.pathname, sectionId, subSectionId])
 
   return (
-    <div className="viewcourse-sidebar flex h-[calc(100vh-5rem)] w-[340px] max-w-[360px] flex-col border-r border-slate-200/90 backdrop-blur-xl">
+    <div className="viewcourse-sidebar flex h-[calc(100vh-5rem)] w-full max-w-full flex-col border-r border-slate-200/90 backdrop-blur-xl sm:max-w-[360px]">
       <div className="mx-4 flex flex-col gap-4 border-b border-slate-200/90 py-5">
         <div className="flex w-full items-center gap-3">
           <button

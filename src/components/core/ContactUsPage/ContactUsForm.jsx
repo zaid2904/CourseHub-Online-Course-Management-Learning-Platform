@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import { HiOutlineCheckCircle, HiOutlineExclamationCircle } from "react-icons/hi"
 
 import CountryCode from "../../../data/countrycode.json"
 import { apiConnector } from "../../../services/apiConnector"
@@ -7,6 +8,7 @@ import { contactusEndpoint } from "../../../services/apis"
 
 const ContactUsForm = () => {
   const [loading, setLoading] = useState(false)
+  const [submitState, setSubmitState] = useState({ type: "", message: "" })
   const {
     register,
     handleSubmit,
@@ -15,18 +17,25 @@ const ContactUsForm = () => {
   } = useForm()
 
   const submitContactForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
       setLoading(true)
+      setSubmitState({ type: "", message: "" })
       await apiConnector(
         "POST",
         contactusEndpoint.CONTACT_US_API,
         data
       )
-      // console.log("Email Res - ", res)
+      setSubmitState({
+        type: "success",
+        message: "Message sent successfully. We will get back to you soon.",
+      })
       setLoading(false)
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
+      setSubmitState({
+        type: "error",
+        message: "Unable to send message right now. Please try again in a moment.",
+      })
       setLoading(false)
     }
   }
@@ -48,9 +57,26 @@ const ContactUsForm = () => {
       className="flex flex-col gap-7"
       onSubmit={handleSubmit(submitContactForm)}
     >
+      {submitState.message && (
+        <div
+          className={`flex items-start gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold ${
+            submitState.type === "success"
+              ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+              : "border-pink-200 bg-pink-50 text-pink-700"
+          }`}
+        >
+          {submitState.type === "success" ? (
+            <HiOutlineCheckCircle className="mt-0.5 text-lg" />
+          ) : (
+            <HiOutlineExclamationCircle className="mt-0.5 text-lg" />
+          )}
+          <p>{submitState.message}</p>
+        </div>
+      )}
+
       <div className="flex flex-col gap-5 lg:flex-row">
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="firstname" className="lable-style">
+          <label htmlFor="firstname" className="input-label">
             First Name
           </label>
           <input
@@ -58,17 +84,18 @@ const ContactUsForm = () => {
             name="firstname"
             id="firstname"
             placeholder="Enter first name"
-            className="form-style"
+            className={`form-style ${errors.firstname ? "is-invalid" : ""}`}
+            aria-invalid={Boolean(errors.firstname)}
             {...register("firstname", { required: true })}
           />
           {errors.firstname && (
-            <span className="-mt-1 text-[12px] text-pink-600 font-medium">
+            <span className="field-error">
               Please enter your name.
             </span>
           )}
         </div>
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="lastname" className="lable-style font-medium text-slate-700">
+          <label htmlFor="lastname" className="input-label">
             Last Name
           </label>
           <input
@@ -83,7 +110,7 @@ const ContactUsForm = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="lable-style font-medium text-slate-700">
+        <label htmlFor="email" className="input-label">
           Email Address
         </label>
         <input
@@ -91,28 +118,27 @@ const ContactUsForm = () => {
           name="email"
           id="email"
           placeholder="Enter email address"
-          className="form-style"
+          className={`form-style ${errors.email ? "is-invalid" : ""}`}
+          aria-invalid={Boolean(errors.email)}
           {...register("email", { required: true })}
         />
         {errors.email && (
-          <span className="-mt-1 text-[12px] text-pink-600 font-medium">
+          <span className="field-error">
             Please enter your Email address.
           </span>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="phonenumber" className="lable-style font-medium text-slate-700">
+        <label htmlFor="phonenumber" className="input-label">
           Phone Number
         </label>
 
-        <div className="flex gap-5">
-          <div className="flex w-[81px] flex-col gap-2">
+        <div className="flex flex-col gap-3 xsm:flex-row xsm:gap-5">
+          <div className="flex w-full xsm:w-[120px] flex-col gap-2">
             <select
-              type="text"
-              name="firstname"
-              id="firstname"
-              placeholder="Enter first name"
+              name="countrycode"
+              id="countrycode"
               className="form-style"
               {...register("countrycode", { required: true })}
             >
@@ -125,13 +151,16 @@ const ContactUsForm = () => {
               })}
             </select>
           </div>
-          <div className="flex w-[calc(100%-90px)] flex-col gap-2">
+          <div className="flex w-full flex-col gap-2">
             <input
-              type="number"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
               name="phonenumber"
               id="phonenumber"
               placeholder="12345 67890"
-              className="form-style"
+              className={`form-style ${errors.phoneNo ? "is-invalid" : ""}`}
+              aria-invalid={Boolean(errors.phoneNo)}
               {...register("phoneNo", {
                 required: {
                   value: true,
@@ -144,14 +173,14 @@ const ContactUsForm = () => {
           </div>
         </div>
         {errors.phoneNo && (
-          <span className="-mt-1 text-[12px] text-pink-600 font-medium">
+          <span className="field-error">
             {errors.phoneNo.message}
           </span>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="message" className="lable-style font-medium text-slate-700">
+        <label htmlFor="message" className="input-label">
           Message
         </label>
         <textarea
@@ -160,11 +189,12 @@ const ContactUsForm = () => {
           cols="30"
           rows="7"
           placeholder="Enter your message here"
-          className="form-style"
+          className={`form-style ${errors.message ? "is-invalid" : ""}`}
+          aria-invalid={Boolean(errors.message)}
           {...register("message", { required: true })}
         />
         {errors.message && (
-          <span className="-mt-1 text-[12px] text-pink-600 font-medium">
+          <span className="field-error">
             Please enter your Message.
           </span>
         )}
@@ -173,13 +203,13 @@ const ContactUsForm = () => {
       <button
         disabled={loading}
         type="submit"
-        className={`rounded-full bg-blue-600 py-4 px-8 text-center text-[16px] font-bold text-white shadow-lg shadow-blue-500/20 
+        className={`btn-primary min-h-[48px] w-full px-8 py-4 text-center text-base font-bold 
          ${
            !loading &&
            "transition-all duration-300 hover:bg-blue-700 hover:-translate-y-0.5 active:scale-95"
          }  disabled:bg-slate-300 disabled:shadow-none disabled:cursor-not-allowed`}
       >
-        Send Message
+        {loading ? "Sending..." : "Send Message"}
       </button>
     </form>
   )

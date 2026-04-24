@@ -1,4 +1,3 @@
-import React from "react"
 import { Link } from "react-router-dom"
 
 const Button = ({ children, active, linkto }) => {
@@ -7,7 +6,7 @@ const Button = ({ children, active, linkto }) => {
       <div
         className={`${
           active ? "btn-primary" : "btn-secondary"
-        } min-w-[150px] text-center text-sm sm:text-base`}
+        } min-w-fit sm:min-w-[150px] text-center text-sm sm:text-base`}
       >
         {children}
       </div>
