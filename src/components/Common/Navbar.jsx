@@ -70,7 +70,7 @@ function Navbar() {
   const isCatalogRoute = location.pathname.startsWith("/catalog/")
 
   return (
-    <header className="sticky top-0 z-50 flex h-20 items-center justify-center border-b border-slate-200/80 bg-white/85 backdrop-blur-xl transition-all duration-300">
+    <header className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-center border-b border-slate-200/80 bg-white/85 backdrop-blur-xl transition-all duration-300">
       <div className="nav-surface flex w-11/12 max-w-maxContent items-center justify-between px-4 py-2 md:px-6">
         <Link to="/" className="group flex items-center gap-3" aria-label="Go to homepage">
           <img

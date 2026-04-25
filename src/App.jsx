@@ -54,7 +54,7 @@ function App() {
 
       <Navbar />
 
-      <main id="app-content" className="flex-1">
+      <main id="app-content" className="flex-1 pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
