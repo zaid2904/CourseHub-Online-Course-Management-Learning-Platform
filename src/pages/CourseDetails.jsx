@@ -22,19 +22,15 @@ function CourseDetails() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // Getting courseId from url parameter
   const { courseId } = useParams()
-  // console.log(`course id: ${courseId}`)
 
-  // Declear a state to save the course details
   const [response, setResponse] = useState(null)
   const [confirmationModal, setConfirmationModal] = useState(null)
+
   useEffect(() => {
-    // Calling fetchCourseDetails fucntion to fetch the details
     ;(async () => {
       try {
         const res = await fetchCourseDetails(courseId)
-        // console.log("course details res: ", res)
         setResponse(res)
       } catch (error) {
         console.log("Could not fetch Course Details")
@@ -42,29 +38,17 @@ function CourseDetails() {
     })()
   }, [courseId])
 
-  // console.log("response: ", response)
-
-  // Calculating Avg Review count
   const [avgReviewCount, setAvgReviewCount] = useState(0)
   useEffect(() => {
     const count = GetAvgRating(response?.data?.courseDetails.ratingAndReviews)
     setAvgReviewCount(count)
   }, [response])
-  // console.log("avgReviewCount: ", avgReviewCount)
 
-  // // Collapse all
-  // const [collapse, setCollapse] = useState("")
   const [isActive, setIsActive] = useState(Array(0))
   const handleActive = (id) => {
-    // console.log("called", id)
-    setIsActive(
-      !isActive.includes(id)
-        ? isActive.concat([id])
-        : isActive.filter((e) => e !== id)
-    )
+    setIsActive(!isActive.includes(id) ? isActive.concat([id]) : isActive.filter((e) => e !== id))
   }
 
-  // Total number of lectures
   const [totalNoOfLectures, setTotalNoOfLectures] = useState(0)
   useEffect(() => {
     let lectures = 0
@@ -77,10 +61,11 @@ function CourseDetails() {
   if (loading || !response) {
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-        <div className="spinner"></div>
+        <div className="spinner" />
       </div>
     )
   }
+
   if (!response.success) {
     return <Error />
   }
@@ -115,60 +100,48 @@ function CourseDetails() {
 
   return (
     <>
-      <div className={`relative w-full bg-slate-50 border-b border-slate-200`}>
-        {/* Hero Section */}
-        <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
+      <section className="page-shell w-full border-b border-slate-200">
+        <div className="content-shell px-0">
           <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
-            <div className="relative block max-h-[30rem] lg:hidden">
-              <div className="absolute bottom-0 left-0 h-full w-full shadow-[#161D29_0px_-64px_36px_-28px_inset]"></div>
-              <img
-                src={thumbnail}
-                alt="course thumbnail"
-                className="aspect-auto w-full"
-              />
+            <div className="relative block max-h-[30rem] overflow-hidden rounded-2xl border border-slate-200 lg:hidden">
+              <img src={thumbnail} alt="Course thumbnail" className="aspect-auto w-full" />
             </div>
-            <div
-              className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-slate-900`}
-            >
-              <div>
-                <p className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[42px]">
-                  {courseName}
-                </p>
-              </div>
-              <p className={`text-slate-600 leading-relaxed max-w-[700px]`}>{courseDescription}</p>
+
+            <div className="z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-slate-900">
+              <p className="section-kicker mb-0 w-fit">Course Details</p>
+              <p className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-[42px]">{courseName}</p>
+              <p className="max-w-[700px] leading-relaxed text-slate-600">{courseDescription}</p>
+
               <div className="text-md flex flex-wrap items-center gap-2 font-medium">
-                <span className="text-yellow-600">{avgReviewCount}</span>
+                <span className="font-bold text-amber-600">{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                <span className="text-slate-500">{`(${ratingAndReviews.length} reviews)`}</span>
-                <span className="text-slate-500">{`${studentsEnroled.length} students enrolled`}</span>
+                <span className="text-slate-500">({ratingAndReviews.length} reviews)</span>
+                <span className="text-slate-500">{studentsEnroled.length} students enrolled</span>
               </div>
-              <div>
-                <p className="">
-                  Created By {`${instructor.firstName} ${instructor.lastName}`}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-5 text-lg">
+
+              <p className="text-base font-semibold text-slate-700">
+                Created by {`${instructor.firstName} ${instructor.lastName}`}
+              </p>
+
+              <div className="flex flex-wrap gap-5 text-sm font-semibold text-slate-500 sm:text-base">
                 <p className="flex items-center gap-2">
-                  {" "}
-                  <BiInfoCircle /> Created at {formatDate(createdAt)}
+                  <BiInfoCircle className="text-blue-600" /> Created at {formatDate(createdAt)}
                 </p>
                 <p className="flex items-center gap-2">
-                  {" "}
-                  <HiOutlineGlobeAlt /> English
+                  <HiOutlineGlobeAlt className="text-blue-600" /> English
                 </p>
               </div>
             </div>
-            <div className="flex w-full flex-col gap-4 border-y border-slate-200 py-4 lg:hidden">
-              <p className="space-x-3 pb-4 text-3xl font-bold text-slate-900">
-                Rs. {price}
-              </p>
-              <button className="yellowButton w-full" onClick={handleBuyCourse}>
+
+            <div className="flex w-full flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:hidden">
+              <p className="text-3xl font-extrabold text-slate-900">Rs. {price}</p>
+              <button className="yellowButton" onClick={handleBuyCourse}>
                 Enroll Now
               </button>
-              <button className="blackButton w-full">Add to Cart</button>
+              <button className="blackButton">Add to Cart</button>
             </div>
           </div>
-          {/* Courses Card */}
+
           <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-full max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute lg:w-1/3 lg:block">
             <CourseDetailsCard
               course={response?.data?.courseDetails}
@@ -177,56 +150,48 @@ function CourseDetails() {
             />
           </div>
         </div>
-      </div>
-      <div className="mx-auto box-content px-4 text-start text-slate-900 lg:w-[1260px]">
+      </section>
+
+      <section className="content-shell text-start text-slate-900">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
-          {/* What will you learn section */}
           <div className="my-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-            <p className="text-3xl font-bold tracking-tight text-slate-900">What you'll learn</p>
-            <div className="mt-5">
+            <p className="text-3xl font-bold tracking-tight text-slate-900">What you will learn</p>
+            <div className="prose prose-slate mt-5 max-w-none">
               <ReactMarkdown>{whatYouWillLearn}</ReactMarkdown>
             </div>
           </div>
 
-          {/* Course Content Section */}
-          <div className="max-w-[830px] ">
+          <div className="max-w-[830px]">
             <div className="flex flex-col gap-3">
-              <p className="text-[28px] font-semibold">Course Content</p>
-              <div className="flex flex-wrap justify-between gap-2">
-                <div className="flex gap-2 text-slate-500">
-                  <span>
-                    {courseContent.length} {`section(s)`}
-                  </span>
-                  <span>
-                    {totalNoOfLectures} {`lecture(s)`}
-                  </span>
+              <p className="text-[28px] font-semibold text-slate-900">Course Content</p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap gap-2 text-sm font-semibold text-slate-500">
+                  <span>{courseContent.length} section(s)</span>
+                  <span>{totalNoOfLectures} lecture(s)</span>
                   <span>{response.data?.totalDuration} total length</span>
                 </div>
-                <div>
-                  <button
-                    className="text-blue-600 font-semibold hover:text-blue-700"
-                    onClick={() => setIsActive([])}
-                  >
-                    Collapse all sections
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  className="text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700"
+                  onClick={() => setIsActive([])}
+                >
+                  Collapse all sections
+                </button>
               </div>
             </div>
 
-            {/* Course Details Accordion */}
-            <div className="py-4">
-              {courseContent?.map((course, index) => (
+            <div className="space-y-3 py-4">
+              {courseContent?.map((courseSection) => (
                 <CourseAccordionBar
-                  course={course}
-                  key={index}
+                  course={courseSection}
+                  key={courseSection._id}
                   isActive={isActive}
                   handleActive={handleActive}
                 />
               ))}
             </div>
 
-            {/* Author Details */}
-            <div className="mb-12 py-4 border-t border-slate-200 mt-8">
+            <div className="mb-12 mt-8 border-t border-slate-200 py-4">
               <p className="text-[28px] font-bold text-slate-900">Author</p>
               <div className="flex items-center gap-4 py-4">
                 <img
@@ -240,13 +205,12 @@ function CourseDetails() {
                 />
                 <p className="text-lg font-semibold text-slate-900">{`${instructor.firstName} ${instructor.lastName}`}</p>
               </div>
-              <p className="text-slate-600 leading-relaxed">
-                {instructor?.additionalDetails?.about}
-              </p>
+              <p className="leading-relaxed text-slate-600">{instructor?.additionalDetails?.about}</p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
       <Footer />
       {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
     </>

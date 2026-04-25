@@ -18,60 +18,62 @@ function ForgotPassword() {
   }
 
   return (
-    <div className="page-shell grid min-h-[calc(100vh-5rem)] place-items-center px-0 py-8 sm:py-12">
+    <main className="page-shell grid min-h-[calc(100vh-5rem)] place-items-center px-0 py-8 sm:py-12">
       {loading ? (
-        <div className="spinner"></div>
+        <div className="spinner" aria-label="Loading" />
       ) : (
-        <div className="form-shell w-11/12 max-w-[520px]">
+        <section className="form-shell w-11/12 max-w-[520px]">
           <p className="section-kicker mb-3">Security</p>
           <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-[2.25rem] sm:leading-[2.75rem]">
-            {!emailSent ? "Reset your password" : "Check email"}
+            {!emailSent ? "Reset your password" : "Check your email"}
           </h1>
           <p className="my-4 text-base font-medium leading-7 text-slate-600 sm:text-[1.125rem] sm:leading-[1.75rem]">
             {!emailSent
-              ? "Have no fear. We'll email you instructions to reset your password. If you don't have access to your email we can try account recovery"
-              : `We have sent the reset email to ${email}`}
+              ? "Enter your account email and we will send secure reset instructions."
+              : `A password reset email has been sent to ${email}.`}
           </p>
 
-          <form onSubmit={handleOnSubmit}>
+          {emailSent && (
+            <div className="status-banner status-banner-success mb-5">
+              <p>Open your inbox and follow the reset link to continue.</p>
+            </div>
+          )}
+
+          <form onSubmit={handleOnSubmit} noValidate>
             {!emailSent && (
-              <label className="w-full">
+              <label className="w-full" htmlFor="forgot-password-email">
                 <p className="input-label">
                   Email Address <sup className="text-pink-600">*</sup>
                 </p>
                 <div className="relative">
                   <HiOutlineMail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
                   <input
+                    id="forgot-password-email"
                     required
                     type="email"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email address"
+                    placeholder="you@example.com"
                     className="form-style w-full !pl-11"
                   />
                 </div>
               </label>
             )}
 
-            <button
-              type="submit"
-              className="btn-primary mt-6 min-h-[48px] w-full text-base font-bold"
-            >
-              {!emailSent ? "Submit" : "Resend Email"}
+            <button type="submit" className="btn-primary mt-6 min-h-[48px] w-full text-base font-bold">
+              {!emailSent ? "Send reset link" : "Resend email"}
             </button>
           </form>
 
           <div className="mt-6 flex items-center justify-between">
-            <Link to="/login">
-              <p className="flex items-center gap-x-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700">
-                <BiArrowBack /> Back To Login
-              </p>
+            <Link to="/login" className="inline-flex items-center gap-x-2 text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700">
+              <BiArrowBack /> Back to Login
             </Link>
           </div>
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   )
 }
 

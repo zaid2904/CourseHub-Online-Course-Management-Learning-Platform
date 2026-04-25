@@ -1,4 +1,3 @@
-
 import Footer from "../components/Common/Footer"
 import ReviewSlider from "../components/Common/ReviewSlider"
 import ContactDetails from "../components/core/ContactUsPage/ContactDetails"
@@ -7,7 +6,7 @@ import ContactForm from "../components/core/ContactUsPage/ContactForm"
 const Contact = () => {
   return (
     <div className="page-shell">
-      <div className="mx-auto w-11/12 max-w-maxContent pt-14 text-slate-900 sm:pt-20">
+      <section className="content-shell pt-14 text-slate-900 sm:pt-20">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <p className="section-kicker mb-3">Contact Us</p>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
@@ -18,27 +17,25 @@ const Contact = () => {
             respond with the right next steps.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-8 pb-6 text-slate-900 lg:flex-row lg:gap-10">
-        {/* Contact Details */}
+      <section className="content-shell flex flex-col justify-between gap-8 pb-8 text-slate-900 lg:flex-row lg:gap-10">
         <div className="lg:w-[40%]">
           <ContactDetails />
         </div>
 
-        {/* Contact Form */}
         <div className="lg:w-[60%]">
           <ContactForm />
         </div>
-      </div>
+      </section>
 
-      <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-slate-900">
-        {/* Reviws from Other Learner */}
-        <h1 className="mt-8 text-center text-3xl font-bold tracking-tight sm:text-4xl">
+      <section className="content-shell relative my-20 flex flex-col items-center justify-between gap-8 text-slate-900">
+        <h2 className="mt-8 text-center text-3xl font-bold tracking-tight sm:text-4xl">
           Reviews from other learners
-        </h1>
+        </h2>
         <ReviewSlider />
-      </div>
+      </section>
+
       <Footer />
     </div>
   )

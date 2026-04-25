@@ -10,18 +10,18 @@ function Dashboard() {
   if (profileLoading || authLoading) {
     return (
       <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-        <div className="spinner"></div>
+        <div className="spinner" />
       </div>
     )
   }
 
   return (
-    <div className="relative min-h-[calc(100vh-5rem)] bg-slate-50/50 p-4 lg:p-8">
+    <div className="page-shell relative min-h-[calc(100vh-5rem)] p-4 lg:p-8">
       <div className="mx-auto max-w-[1440px]">
-        <div className="dashboard-shell flex flex-col gap-6 lg:flex-row">
+        <div className="dashboard-shell flex flex-col gap-6 p-4 lg:flex-row lg:p-6">
           <Sidebar />
-          <main className="flex-1 min-w-0">
-            <div className="mx-auto w-full max-w-[1000px] py-4">
+          <main className="min-w-0 flex-1">
+            <div className="mx-auto w-full max-w-[1000px] py-2 lg:py-4">
               <Outlet />
             </div>
           </main>

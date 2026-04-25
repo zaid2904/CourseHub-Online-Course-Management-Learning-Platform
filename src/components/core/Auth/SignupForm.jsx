@@ -14,12 +14,9 @@ function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // student or instructor
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
-
   const [passAlert, setPassAlert] = useState("")
   const [confirmAlert, setConfirmAlert] = useState("")
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -27,13 +24,11 @@ function SignupForm() {
     password: "",
     confirmPassword: "",
   })
-
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const { firstName, lastName, email, password, confirmPassword } = formData
 
-  // Handle input fields, when some value changes
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -49,31 +44,28 @@ function SignupForm() {
     }
   }
 
-  // Handle Form Submission
   const handleOnSubmit = (e) => {
     e.preventDefault()
+
     if (password.length < 8) {
-      setPassAlert('Password must be of at least eight characters')
+      setPassAlert("Password must be at least 8 characters")
       return
     }
 
     if (password !== confirmPassword) {
       setConfirmAlert("Password and confirm password must match")
-      toast.error("Passwords Do Not Match")
+      toast.error("Passwords do not match")
       return
     }
+
     const signupData = {
       ...formData,
       accountType,
     }
 
-    // Setting signup data to state
-    // To be used after otp verification
     dispatch(setSignupData(signupData))
-    // Send OTP to user for verification
     dispatch(sendOtp(formData.email, navigate))
 
-    // Reset
     setFormData({
       firstName: "",
       lastName: "",
@@ -86,7 +78,6 @@ function SignupForm() {
     setConfirmAlert("")
   }
 
-  // data to pass to Tab component
   const tabData = [
     {
       id: 1,
@@ -102,88 +93,91 @@ function SignupForm() {
 
   return (
     <div>
-      {/* Tab */}
       <Tab tabData={tabData} field={accountType} setField={setAccountType} />
-      {/* Form */}
-      <form onSubmit={handleOnSubmit} className="mt-1 flex w-full flex-col gap-y-5">
+
+      <form onSubmit={handleOnSubmit} className="mt-1 flex w-full flex-col gap-y-5" noValidate>
         <div className="flex flex-col gap-4 sm:flex-row sm:gap-x-4">
-          <label className="w-full">
+          <label className="w-full" htmlFor="signup-first-name">
             <p className="input-label">
               First Name <sup className="text-pink-600">*</sup>
             </p>
             <div className="relative">
               <HiOutlineUser className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
               <input
+                id="signup-first-name"
                 required
                 type="text"
                 name="firstName"
                 autoComplete="given-name"
                 value={firstName}
                 onChange={handleOnChange}
-                placeholder="Enter first name"
+                placeholder="First name"
                 className="form-style w-full !pl-11"
               />
             </div>
           </label>
 
-          <label className="w-full">
+          <label className="w-full" htmlFor="signup-last-name">
             <p className="input-label">
               Last Name <sup className="text-pink-600">*</sup>
             </p>
             <div className="relative">
               <HiOutlineUser className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
               <input
+                id="signup-last-name"
                 required
                 type="text"
                 name="lastName"
                 autoComplete="family-name"
                 value={lastName}
                 onChange={handleOnChange}
-                placeholder="Enter last name"
+                placeholder="Last name"
                 className="form-style w-full !pl-11"
               />
             </div>
           </label>
         </div>
 
-        <label className="w-full">
+        <label className="w-full" htmlFor="signup-email">
           <p className="input-label">
             Email Address <sup className="text-pink-600">*</sup>
           </p>
           <div className="relative">
             <HiOutlineMail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
             <input
+              id="signup-email"
               required
               type="email"
               name="email"
               inputMode="email"
               autoComplete="email"
-              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               value={email}
               onChange={handleOnChange}
-              placeholder="Enter email address"
+              placeholder="you@example.com"
               className="form-style w-full !pl-11"
             />
           </div>
         </label>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:gap-x-4">
-          <label className="relative w-full">
+          <label className="relative w-full" htmlFor="signup-password">
             <p className="input-label">
               Create Password <sup className="text-pink-600">*</sup>
             </p>
             <div className="relative">
               <HiOutlineLockClosed className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
               <input
+                id="signup-password"
                 required
                 type={showPassword ? "text" : "password"}
                 name="password"
                 autoComplete="new-password"
                 value={password}
                 onChange={handleOnChange}
-                placeholder="Enter Password"
+                placeholder="Create password"
                 className={`form-style w-full !pl-11 !pr-12 ${passAlert ? "is-invalid" : ""}`}
                 aria-invalid={Boolean(passAlert)}
+                aria-describedby="signup-password-help"
               />
               <button
                 type="button"
@@ -191,36 +185,38 @@ function SignupForm() {
                 className="absolute right-2 top-1/2 z-[10] -translate-y-1/2 rounded-full p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? (
-                  <AiOutlineEyeInvisible fontSize={20} />
-                ) : (
-                  <AiOutlineEye fontSize={20} />
-                )}
+                {showPassword ? <AiOutlineEyeInvisible fontSize={20} /> : <AiOutlineEye fontSize={20} />}
               </button>
             </div>
             {passAlert ? (
-              <p className="field-error">{passAlert}</p>
+              <p id="signup-password-help" className="field-error">
+                {passAlert}
+              </p>
             ) : (
-              <p className="field-hint">Use at least 8 characters.</p>
+              <p id="signup-password-help" className="field-hint">
+                Use at least 8 characters.
+              </p>
             )}
           </label>
 
-          <label className="relative w-full">
+          <label className="relative w-full" htmlFor="signup-confirm-password">
             <p className="input-label">
               Confirm Password <sup className="text-pink-600">*</sup>
             </p>
             <div className="relative">
               <HiOutlineLockClosed className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400" />
               <input
+                id="signup-confirm-password"
                 required
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 autoComplete="new-password"
                 value={confirmPassword}
                 onChange={handleOnChange}
-                placeholder="Confirm Password"
+                placeholder="Confirm password"
                 className={`form-style w-full !pl-11 !pr-12 ${confirmAlert ? "is-invalid" : ""}`}
                 aria-invalid={Boolean(confirmAlert)}
+                aria-describedby="signup-confirm-password-help"
               />
               <button
                 type="button"
@@ -228,21 +224,22 @@ function SignupForm() {
                 className="absolute right-2 top-1/2 z-[10] -translate-y-1/2 rounded-full p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
                 aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
               >
-                {showConfirmPassword ? (
-                  <AiOutlineEyeInvisible fontSize={20} />
-                ) : (
-                  <AiOutlineEye fontSize={20} />
-                )}
+                {showConfirmPassword ? <AiOutlineEyeInvisible fontSize={20} /> : <AiOutlineEye fontSize={20} />}
               </button>
             </div>
-            {confirmAlert && <p className="field-error">{confirmAlert}</p>}
+            {confirmAlert ? (
+              <p id="signup-confirm-password-help" className="field-error">
+                {confirmAlert}
+              </p>
+            ) : (
+              <p id="signup-confirm-password-help" className="field-hint">
+                Re-enter the same password for confirmation.
+              </p>
+            )}
           </label>
         </div>
 
-        <button
-          type="submit"
-          className="btn-primary mt-4 min-h-[48px] w-full text-base font-bold"
-        >
+        <button type="submit" className="btn-primary mt-4 min-h-[48px] w-full text-base font-bold">
           Create Account
         </button>
 

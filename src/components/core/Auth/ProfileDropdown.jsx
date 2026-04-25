@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
@@ -16,42 +16,69 @@ export default function ProfileDropdown() {
 
   useOnClickOutside(ref, () => setOpen(false))
 
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener("keydown", handleEsc)
+    return () => document.removeEventListener("keydown", handleEsc)
+  }, [])
+
   if (!user) return null
 
   return (
-    <button className="relative" onClick={() => setOpen(true)}>
-      <div className="flex items-center gap-x-1">
+    <div className="relative" ref={ref}>
+      <button
+        className="flex min-h-[44px] items-center gap-x-2 rounded-full border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Open profile menu"
+      >
         <img
           src={user?.image}
-          alt={`profile-${user?.firstName}`}
+          alt={`${user?.firstName} profile`}
           className="aspect-square w-[32px] rounded-full object-cover ring-2 ring-slate-100"
         />
-        <AiOutlineCaretDown className="text-sm text-slate-500" />
-      </div>
-      {open && (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="absolute top-[118%] right-0 z-[1000] min-w-[160px] max-w-[220px] divide-y-[1px] divide-slate-100 overflow-hidden rounded-xl border-[1px] border-slate-200 bg-white shadow-lg max-[420px]:right-[-10px]"
-          ref={ref}
+        <AiOutlineCaretDown
+          className={`text-sm text-slate-500 transition-transform duration-200 ${
+            open ? "rotate-180" : "rotate-0"
+          }`}
+        />
+      </button>
+
+      <div
+        className={`absolute right-0 top-[118%] z-[1000] min-w-[180px] max-w-[220px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg transition-all duration-200 ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
+        }`}
+        role="menu"
+      >
+        <Link
+          to="/dashboard/my-profile"
+          onClick={() => setOpen(false)}
+          className="flex min-h-[44px] w-full items-center gap-x-2 border-b border-slate-100 px-4 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-blue-600"
+          role="menuitem"
         >
-          <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
-            <div className="flex w-full items-center gap-x-2 py-3 px-4 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors">
-              <VscDashboard className="text-lg" />
-              Dashboard
-            </div>
-          </Link>
-          <div
-            onClick={() => {
-              dispatch(logout(navigate))
-              setOpen(false)
-            }}
-            className="flex w-full items-center gap-x-2 py-3 px-4 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-red-600 cursor-pointer transition-colors"
-          >
-            <VscSignOut className="text-lg" />
-            Logout
-          </div>
-        </div>
-      )}
-    </button>
+          <VscDashboard className="text-lg" />
+          Dashboard
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(logout(navigate))
+            setOpen(false)
+          }}
+          className="flex min-h-[44px] w-full items-center gap-x-2 px-4 py-3 text-left text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-red-600"
+          role="menuitem"
+        >
+          <VscSignOut className="text-lg" />
+          Logout
+        </button>
+      </div>
+    </div>
   )
 }

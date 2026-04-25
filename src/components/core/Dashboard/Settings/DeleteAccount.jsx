@@ -18,31 +18,30 @@ export default function DeleteAccount() {
   }
 
   return (
-    <>
-      <div className="my-10 flex flex-row gap-x-6 rounded-[32px] border border-pink-100 bg-pink-50/50 p-8 shadow-sm">
-        <div className="flex aspect-square h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-pink-100 text-pink-600 shadow-sm">
+    <div className="my-10 rounded-[32px] border border-pink-100 bg-pink-50/60 p-6 shadow-sm sm:p-8">
+      <div className="flex flex-col gap-5 sm:flex-row sm:gap-x-6">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-pink-100 text-pink-600 shadow-sm">
           <FiTrash2 className="text-3xl" />
         </div>
-        <div className="flex flex-col space-y-3">
-          <h2 className="text-xl font-bold text-pink-900 tracking-tight">
-            Delete Account
-          </h2>
+
+        <div className="space-y-3">
+          <h2 className="text-xl font-bold tracking-tight text-pink-900">Delete Account</h2>
           <div className="max-w-xl space-y-1">
             <p className="text-sm font-bold text-pink-800">Would you like to delete your account?</p>
-            <p className="text-sm font-medium text-pink-600/80 leading-relaxed">
-              This account may contain Paid Courses. Deleting your account is
-              permanent and will remove all the content associated with it.
+            <p className="text-sm font-medium leading-relaxed text-pink-700">
+              This action is permanent and will remove your profile, enrolled courses, and related data.
             </p>
           </div>
+
           <button
             type="button"
-            className="w-fit cursor-pointer font-bold text-pink-600 hover:text-pink-700 transition-all underline underline-offset-4 decoration-2"
+            className="inline-flex min-h-[44px] items-center rounded-full border border-pink-300 bg-white px-5 text-sm font-bold text-pink-600 transition-colors hover:bg-pink-100 hover:text-pink-700"
             onClick={handleDeleteAccount}
           >
-            I want to delete my account.
+            I want to delete my account
           </button>
         </div>
       </div>
-    </>
+    </div>
   )
 }

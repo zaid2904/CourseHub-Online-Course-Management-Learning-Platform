@@ -1,11 +1,8 @@
 import { useEffect } from "react"
 import "./App.css"
-// Redux
 import { useDispatch, useSelector } from "react-redux"
-// React Router
 import { Route, Routes, useNavigate } from "react-router-dom"
 
-// Components
 import Navbar from "./components/Common/Navbar"
 import OpenRoute from "./components/core/Auth/OpenRoute"
 import PrivateRoute from "./components/core/Auth/PrivateRoute"
@@ -25,7 +22,6 @@ import CourseDetails from "./pages/CourseDetails"
 import Dashboard from "./pages/Dashboard"
 import Error from "./pages/Error"
 import ForgotPassword from "./pages/ForgotPassword"
-// Pages
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
@@ -45,116 +41,114 @@ function App() {
       const token = JSON.parse(localStorage.getItem("token"))
       dispatch(getUserDetails(token, navigate))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [dispatch, navigate])
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-transparent font-inter">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="courses/:courseId" element={<CourseDetails />} />
-        <Route path="catalog/:catalogName" element={<Catalog />} />
-        {/* Open Route - for Only Non Logged in User */}
-        <Route
-          path="login"
-          element={
-            <OpenRoute>
-              <Login />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="forgot-password"
-          element={
-            <OpenRoute>
-              <ForgotPassword />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="update-password/:id"
-          element={
-            <OpenRoute>
-              <UpdatePassword />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="signup"
-          element={
-            <OpenRoute>
-              <Signup />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="verify-email"
-          element={
-            <OpenRoute>
-              <VerifyEmail />
-            </OpenRoute>
-          }
-        />
-        {/* Private Route - for Only Logged in User */}
-        <Route
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        >
-          {/* Route for all users */}
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/Settings" element={<Settings />} />
-          {/* Route only for Instructors */}
-          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-            <>
-              <Route path="dashboard/instructor" element={<Instructor />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route
-                path="dashboard/edit-course/:courseId"
-                element={<EditCourse />}
-              />
-            </>
-          )}
-          {/* Route only for Students */}
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route
-                path="dashboard/enrolled-courses"
-                element={<EnrolledCourses />}
-              />
-              <Route path="/dashboard/cart" element={<Cart />} />
-            </>
-          )}
-          <Route path="dashboard/settings" element={<Settings />} />
-        </Route>
+    <div className="flex min-h-screen w-full flex-col bg-transparent font-inter text-slate-900">
+      <a
+        href="#app-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[1200] focus:rounded-full focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to content
+      </a>
 
-        {/* For the watching course lectures */}
-        <Route
-          element={
-            <PrivateRoute>
-              <ViewCourse />
-            </PrivateRoute>
-          }
-        >
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
+      <Navbar />
+
+      <main id="app-content" className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="courses/:courseId" element={<CourseDetails />} />
+          <Route path="catalog/:catalogName" element={<Catalog />} />
+
+          <Route
+            path="login"
+            element={
+              <OpenRoute>
+                <Login />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="forgot-password"
+            element={
+              <OpenRoute>
+                <ForgotPassword />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="update-password/:id"
+            element={
+              <OpenRoute>
+                <UpdatePassword />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <OpenRoute>
+                <Signup />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="verify-email"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
+              </OpenRoute>
+            }
+          />
+
+          <Route
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
+            <Route path="dashboard/my-profile" element={<MyProfile />} />
+            <Route path="dashboard/Settings" element={<Settings />} />
+
+            {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route path="dashboard/instructor" element={<Instructor />} />
+                <Route path="dashboard/my-courses" element={<MyCourses />} />
+                <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
+              </>
+            )}
+
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+                <Route path="/dashboard/cart" element={<Cart />} />
+              </>
+            )}
+            <Route path="dashboard/settings" element={<Settings />} />
+          </Route>
+
+          <Route
+            element={
+              <PrivateRoute>
+                <ViewCourse />
+              </PrivateRoute>
+            }
+          >
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
               <Route
                 path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
                 element={<VideoDetails />}
               />
-            </>
-          )}
-        </Route>
+            )}
+          </Route>
 
-        {/* 404 Page */}
-        <Route path="*" element={<Error />} />
-      </Routes>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </main>
     </div>
   )
 }

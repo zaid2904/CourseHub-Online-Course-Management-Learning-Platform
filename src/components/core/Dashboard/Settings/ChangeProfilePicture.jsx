@@ -22,7 +22,6 @@ export default function ChangeProfilePicture() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    // console.log(file)
     if (file) {
       setImageFile(file)
       previewFile(file)
@@ -37,18 +36,19 @@ export default function ChangeProfilePicture() {
     }
   }
 
-  const handleFileUpload = () => {
+  const handleFileUpload = async () => {
+    if (!imageFile) return
+
     try {
-      console.log("uploading...")
       setLoading(true)
       const formData = new FormData()
       formData.append("displayPicture", imageFile)
-      // console.log("formdata", formData)
-      dispatch(updateDisplayPicture(token, formData)).then(() => {
-        setLoading(false)
-      })
+      await dispatch(updateDisplayPicture(token, formData))
+      setImageFile(null)
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -57,44 +57,49 @@ export default function ChangeProfilePicture() {
       previewFile(imageFile)
     }
   }, [imageFile])
+
   return (
-    <>
-      <div className="flex items-center justify-between rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
-        <div className="flex items-center gap-x-6">
+    <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-x-4 sm:gap-x-6">
           <img
             src={previewSource || user?.image}
-            alt={`profile-${user?.firstName}`}
+            alt={`${user?.firstName} profile`}
             className="aspect-square w-20 rounded-full object-cover ring-4 ring-slate-50 shadow-sm"
           />
-          <div className="space-y-3">
-            <p className="text-lg font-bold text-slate-900 tracking-tight">Change Profile Picture</p>
-            <div className="flex flex-row gap-3">
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                className="hidden"
-                accept="image/png, image/gif, image/jpeg"
-              />
-              <button
-                onClick={handleClick}
-                disabled={loading}
-                className="cursor-pointer rounded-full bg-slate-100 py-2.5 px-6 font-bold text-slate-600 hover:bg-slate-200 transition-all duration-300"
-              >
-                Select Image
-              </button>
-              <IconBtn
-                text={loading ? "Uploading..." : "Upload"}
-                onclick={handleFileUpload}
-              >
-                {!loading && (
-                  <FiUpload className="text-lg" />
-                )}
-              </IconBtn>
-            </div>
+          <div className="space-y-2">
+            <p className="text-lg font-bold tracking-tight text-slate-900">Change profile picture</p>
+            <p className="text-sm font-medium text-slate-500">
+              Upload a square image for the best result. PNG or JPG up to 2MB.
+            </p>
           </div>
         </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="hidden"
+            accept="image/png, image/gif, image/jpeg"
+          />
+          <button
+            type="button"
+            onClick={handleClick}
+            disabled={loading}
+            className="btn-secondary px-5"
+          >
+            Select Image
+          </button>
+          <IconBtn
+            text={loading ? "Uploading..." : "Upload"}
+            onclick={handleFileUpload}
+            disabled={loading || !imageFile}
+          >
+            {!loading && <FiUpload className="text-lg" />}
+          </IconBtn>
+        </div>
       </div>
-    </>
+    </div>
   )
 }

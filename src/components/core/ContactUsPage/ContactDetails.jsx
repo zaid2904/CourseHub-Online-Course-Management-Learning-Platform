@@ -5,46 +5,59 @@ import * as Icon2 from "react-icons/io5"
 const contactDetails = [
   {
     icon: "HiChatBubbleLeftRight",
-    heading: "Chat on us",
+    heading: "Chat with us",
     description: "Our friendly team is here to help.",
     details: "info@coursehub.com",
+    href: "mailto:info@coursehub.com",
   },
   {
     icon: "BiWorld",
     heading: "Visit us",
     description: "Come and say hello at our office HQ.",
-    details:
-      "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
+    details: "Akshya Nagar 1st Block 1st Cross, Rammurthy Nagar, Bangalore-560016",
+    href: null,
   },
   {
     icon: "IoCall",
     heading: "Call us",
-    description: "Mon - Fri From 8am to 5pm",
+    description: "Mon - Fri from 8am to 5pm",
     details: "+123 456 7869",
+    href: "tel:+1234567869",
   },
 ]
 
 const ContactDetails = () => {
   return (
     <div className="section-panel flex flex-col gap-5 p-6 lg:p-8">
-      {contactDetails.map((ele, i) => {
-        let Icon = Icon1[ele.icon] || Icon2[ele.icon] || Icon3[ele.icon]
+      {contactDetails.map((item) => {
+        const Icon = Icon1[item.icon] || Icon2[item.icon] || Icon3[item.icon]
+
         return (
-          <div
-            className="group flex flex-col gap-1 rounded-2xl border border-transparent p-4 transition-all duration-200 hover:border-slate-200 hover:bg-slate-50"
-            key={i}
+          <article
+            className="group rounded-2xl border border-slate-100 bg-slate-50/60 p-4 transition-all duration-200 hover:border-slate-200 hover:bg-white"
+            key={item.heading}
           >
             <div className="flex flex-row items-center gap-4">
-              <div className="text-blue-600 transition-transform duration-300 group-hover:scale-105">
-                <Icon size={28} />
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-600 transition-transform duration-300 group-hover:scale-105">
+                <Icon size={24} />
               </div>
-              <h1 className="text-xl font-bold text-slate-900 tracking-tight">
-                {ele?.heading}
-              </h1>
+              <div>
+                <h2 className="text-lg font-bold tracking-tight text-slate-900">{item.heading}</h2>
+                <p className="text-sm font-medium text-slate-500">{item.description}</p>
+              </div>
             </div>
-            <p className="font-medium text-slate-500 ml-11">{ele?.description}</p>
-            <p className="font-bold text-slate-900 ml-11 mt-1">{ele?.details}</p>
-          </div>
+
+            {item.href ? (
+              <a
+                href={item.href}
+                className="mt-3 block break-words pl-16 text-sm font-semibold text-slate-700 transition-colors hover:text-blue-600"
+              >
+                {item.details}
+              </a>
+            ) : (
+              <p className="mt-3 break-words pl-16 text-sm font-semibold text-slate-700">{item.details}</p>
+            )}
+          </article>
         )
       })}
     </div>
