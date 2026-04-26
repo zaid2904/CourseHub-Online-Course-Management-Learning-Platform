@@ -1,18 +1,22 @@
-import React from "react";
-import ContactUsForm from "../ContactUsPage/ContactUsForm";
+import ContactForm from "../ContactUsPage/ContactForm"
 
 const ContactFormSection = () => {
   return (
-    <div className="mx-auto">
-      <h1 className="text-center text-4xl font-semibold">Get in Touch</h1>
-      <p className="text-center text-richblack-300 mt-3">
-        We&apos;d love to here for you, Please fill out this form.
-      </p>
-      <div className="mt-12 mx-auto">
-        <ContactUsForm />
+    <section className="relative py-6 sm:py-10" aria-label="About contact section">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[8%] top-10 h-44 w-44 rounded-full bg-blue-100/70 blur-3xl" />
+        <div className="absolute bottom-2 right-[10%] h-44 w-44 rounded-full bg-cyan-100/70 blur-3xl" />
       </div>
-    </div>
-  );
-};
 
-export default ContactFormSection;
+      <ContactForm
+        align="center"
+        className="mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-12"
+        kicker="Get in touch"
+        title="We\u2019d love to hear from you"
+        description="Have a question, feedback, or partnership idea? Fill out the form below and our team will get back to you soon."
+      />
+    </section>
+  )
+}
+
+export default ContactFormSection

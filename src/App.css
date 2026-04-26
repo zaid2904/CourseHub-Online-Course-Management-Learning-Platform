@@ -247,6 +247,10 @@ details > summary::-webkit-details-marker {
     @apply border-pink-300 bg-pink-50/50 focus:border-pink-400 focus:ring-pink-200;
   }
 
+  .form-style.is-valid {
+    @apply border-emerald-300 bg-emerald-50/40 focus:border-emerald-400 focus:ring-emerald-200;
+  }
+
   .section_heading {
     @apply font-display text-2xl font-bold tracking-tight text-slate-900 lg:text-4xl;
   }
