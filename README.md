@@ -39,7 +39,7 @@ CourseHub is a full stack course management and online learning platform built w
 ## Project Structure
 
 ```text
-EduNest-EdTech/
+Root-Folder/
 |-- public/
 |-- src/
 |   |-- components/
@@ -184,4 +184,4 @@ npm run server
 
 ## Author
 
-Built as a full stack EdTech course platform project.
+Built as a full stack CourseHub course platform project.
