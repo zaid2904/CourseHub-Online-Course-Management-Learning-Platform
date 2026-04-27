@@ -90,7 +90,7 @@ Main route groups:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/zaid2904/CourseHub-Online-Course-Management-Learning-Platform.git
 cd EduNest-EdTech
 ```
 
