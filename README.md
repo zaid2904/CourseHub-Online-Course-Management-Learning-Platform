@@ -91,7 +91,7 @@ Main route groups:
 
 ```bash
 git clone https://github.com/zaid2904/CourseHub-Online-Course-Management-Learning-Platform.git
-cd EduNest-EdTech
+cd FolderName
 ```
 
 ### 2. Install frontend dependencies
